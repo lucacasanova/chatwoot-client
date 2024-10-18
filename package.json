@@ -1,6 +1,6 @@
 {
   "name": "chatwoot-client",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "TypeScript client for the Chatwoot API",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
