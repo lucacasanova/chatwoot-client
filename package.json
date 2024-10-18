@@ -1,9 +1,12 @@
 {
   "name": "chatwoot-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TypeScript client for the Chatwoot API",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "chatwoot",
@@ -11,14 +14,16 @@
     "client"
   ],
   "author": "Luca Casanova",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/lucacasanova/chatwoot-client.git"
   },
   "dependencies": {
+    "axios": "^1.7.7"
+  },
+  "devDependencies": {
     "@types/node": "^22.7.6",
-    "axios": "^1.7.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   }
