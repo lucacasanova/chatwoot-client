@@ -151,7 +151,7 @@ interface ApiResponse<T> {
 class ChatwootClient {
   private axiosInstance: AxiosInstance;
   private config: Config;
-  private version = "1";
+  private version: string = "1";
 
   constructor(config: Config) {
     if (!config.host || !config.token) {
