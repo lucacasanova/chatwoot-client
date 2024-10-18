@@ -1,9 +1,9 @@
 {
-  "name": "chatwoot-client",
-  "version": "1.0.13",
+  "name": "chatwoot-client-node-js",
+  "version": "1.0.0",
   "description": "TypeScript client for the Chatwoot API",
-  "main": "dist/chatwoot-client.js",
-  "types": "dist/types/chatwoot-client.d.ts",
+  "main": "dist/chatwoot-client-node-js.js",
+  "types": "dist/types/chatwoot-client-node-js.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucacasanova/chatwoot-client.git"
+    "url": "https://github.com/lucacasanova/chatwoot-client-node-js.git"
   },
   "dependencies": {
     "axios": "^1.7.7"

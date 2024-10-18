@@ -10,7 +10,7 @@ This library fully supports the Chatwoot API v1.0.0 (Platform and Application).
 You can install the library using npm:
 
 ```bash
-npm install --save chatwoot-client
+npm install --save chatwoot-client-node-js
 ```
 
 ## Configuration
@@ -18,7 +18,7 @@ npm install --save chatwoot-client
 To use the library, you need to provide the host URL and an API access token (platformAppApiKey or userApiKey).
 
 ```ts
-import ChatwootClient from 'chatwoot-client';
+import ChatwootClient from 'chatwoot-client-node-js';
 
 const config = {
     host: 'https://app.chatwoot.com',

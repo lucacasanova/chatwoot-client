@@ -1,4 +1,4 @@
-declare module "chatwoot-client" {
+declare module "chatwoot-client-node-js" {
   import { AxiosInstance, AxiosResponse } from "axios";
 
   interface ApiResponse<T> {
