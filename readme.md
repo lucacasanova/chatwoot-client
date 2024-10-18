@@ -22,7 +22,8 @@ import ChatwootClient from 'chatwoot-client';
 
 const config = {
     host: 'https://app.chatwoot.com',
-    token: 'your-platform-app-api-key'
+    userToken: 'your-user-api-key',
+    platformToken: 'your-platform-app-api-key'
 };
 
 const client = new ChatwootClient(config);

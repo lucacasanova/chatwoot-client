@@ -11,7 +11,8 @@ declare module "chatwoot-client" {
 
   interface Config {
     host: string;
-    token?: string;
+    userToken?: string;
+    platformToken?: string;
     version?: string;
   }
 

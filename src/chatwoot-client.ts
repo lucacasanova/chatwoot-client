@@ -154,21 +154,25 @@ class ChatwootClient {
   private version: string = "1";
 
   constructor(config: Config) {
-    if (!config.host || !config.token) {
-      throw new Error("Host and token are required");
+    if (!config.host) {
+      throw new Error("Host is required");
     }
-
+    if (!config.userToken || !config.platformToken) {
+      throw new Error("userToken or platformToken is required");
+    }
     if (config.version) {
       this.version = config.version;
     }
-
     this.config = config;
     const options: any = {
       baseURL: config.host,
       headers: {},
     };
-    if (config.token) {
-      options.headers["api_access_token"] = config.token;
+    if (config.userToken) {
+      options.headers["api_access_token"] = config.userToken;
+    }
+    if (config.platformToken) {
+      options.headers["api_access_token"] = config.platformToken;
     }
     this.axiosInstance = axios.create(options);
   }
@@ -222,6 +226,9 @@ class ChatwootClient {
   public async createAccount({
     name,
   }: CreateAccount): Promise<ApiResponse<Account>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.post(`/platform/api/v${this.version}/accounts`, {
         name,
@@ -232,6 +239,9 @@ class ChatwootClient {
   public async getAccount({
     accountId,
   }: GetAccount): Promise<ApiResponse<Account>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -246,6 +256,9 @@ class ChatwootClient {
     accountId,
     name,
   }: UpdateAccount): Promise<ApiResponse<Account>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -263,6 +276,9 @@ class ChatwootClient {
   public async deleteAccount({
     accountId,
   }: DeleteAccount): Promise<ApiResponse<void>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -280,6 +296,9 @@ class ChatwootClient {
   public async listAccountUsers({
     accountId,
   }: ListAccountUsers): Promise<ApiResponse<AccountUser[]>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -295,6 +314,9 @@ class ChatwootClient {
     userId,
     role,
   }: CreateAccountUser): Promise<ApiResponse<AccountUser>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -316,6 +338,9 @@ class ChatwootClient {
     accountId,
     userId,
   }: DeleteAccountUser): Promise<ApiResponse<void>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -335,6 +360,9 @@ class ChatwootClient {
    */
 
   public async listAgentBots(): Promise<ApiResponse<AgentBot[]>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(`/platform/api/v${this.version}/agent_bots`)
     );
@@ -345,6 +373,9 @@ class ChatwootClient {
     description,
     outgoing_url,
   }: CreateAgentBot): Promise<ApiResponse<AgentBot>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.post(`/platform/api/v${this.version}/agent_bots`, {
         name,
@@ -357,6 +388,9 @@ class ChatwootClient {
   public async getAgentBotDetails({
     id,
   }: GetAgentBotDetails): Promise<ApiResponse<AgentBot>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(`/platform/api/v${this.version}/agent_bots/${id}`)
     );
@@ -368,6 +402,9 @@ class ChatwootClient {
     description,
     outgoing_url,
   }: UpdateAgentBot): Promise<ApiResponse<AgentBot>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.patch(
         `/platform/api/v${this.version}/agent_bots/${id}`,
@@ -383,6 +420,9 @@ class ChatwootClient {
   public async deleteAgentBot({
     id,
   }: DeleteAgentBot): Promise<ApiResponse<void>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
         `/platform/api/v${this.version}/agent_bots/${id}`
@@ -400,6 +440,9 @@ class ChatwootClient {
     password,
     customAttributes,
   }: CreateUser): Promise<ApiResponse<User>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.post(`/platform/api/v${this.version}/users`, {
         name,
@@ -413,6 +456,9 @@ class ChatwootClient {
   public async getUserDetails({
     id,
   }: GetUserDetails): Promise<ApiResponse<UserDetails>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(`/platform/api/v${this.version}/users/${id}`)
     );
@@ -425,6 +471,9 @@ class ChatwootClient {
     password,
     customAttributes,
   }: UpdateUser): Promise<ApiResponse<User>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     if (!id) {
       return { success: false, error: "id is required" };
     }
@@ -439,6 +488,9 @@ class ChatwootClient {
   }
 
   public async deleteUser({ id }: DeleteUser): Promise<ApiResponse<void>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     if (!id) {
       return { success: false, error: "id is required" };
     }
@@ -450,6 +502,9 @@ class ChatwootClient {
   public async getUserSSOLink({
     id,
   }: GetUserSSOLink): Promise<ApiResponse<UserSSOLink>> {
+    if (!this.config.platformToken) {
+      return { success: false, error: "platformToken is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(`/platform/api/v${this.version}/users/${id}/login`)
     );
@@ -462,6 +517,9 @@ class ChatwootClient {
   public async listAccountAgentBots({
     accountId,
   }: ListAccountAgentBots): Promise<ApiResponse<AccountAgentBot[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -478,6 +536,9 @@ class ChatwootClient {
     description,
     outgoing_url,
   }: CreateAccountAgentBot): Promise<ApiResponse<AccountAgentBot>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -497,6 +558,9 @@ class ChatwootClient {
     accountId,
     id,
   }: GetAccountAgentBotDetails): Promise<ApiResponse<AccountAgentBot>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -517,6 +581,9 @@ class ChatwootClient {
     description,
     outgoing_url,
   }: UpdateAccountAgentBot): Promise<ApiResponse<AccountAgentBot>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -539,6 +606,9 @@ class ChatwootClient {
     accountId,
     id,
   }: DeleteAccountAgentBot): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -559,6 +629,9 @@ class ChatwootClient {
   public async listAgents({
     accountId,
   }: ListAgents): Promise<ApiResponse<Agent[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -577,6 +650,9 @@ class ChatwootClient {
     availabilityStatus,
     autoOffline,
   }: AddAgent): Promise<ApiResponse<Agent>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -610,6 +686,9 @@ class ChatwootClient {
     availability,
     autoOffline,
   }: UpdateAgent): Promise<ApiResponse<Agent>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -635,6 +714,9 @@ class ChatwootClient {
     accountId,
     id,
   }: RemoveAgent): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -652,6 +734,9 @@ class ChatwootClient {
   public async listCannedResponses({
     accountId,
   }: ListCannedResponses): Promise<ApiResponse<CannedResponse[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -667,6 +752,9 @@ class ChatwootClient {
     content,
     short_code,
   }: AddCannedResponse): Promise<ApiResponse<CannedResponse>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -685,6 +773,9 @@ class ChatwootClient {
     accountId,
     id,
   }: DeleteCannedResponse): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -707,6 +798,9 @@ class ChatwootClient {
     sort,
     page,
   }: ListContacts): Promise<ApiResponse<ContactListItemPayload[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -731,6 +825,9 @@ class ChatwootClient {
     identifier,
     customAttributes,
   }: CreateContact): Promise<ApiResponse<ContactPayload>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -758,6 +855,9 @@ class ChatwootClient {
     accountId,
     id,
   }: GetContact): Promise<ApiResponse<ContactPayload>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -782,6 +882,9 @@ class ChatwootClient {
     identifier,
     customAttributes,
   }: UpdateContact): Promise<ApiResponse<ContactPayload>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -808,6 +911,9 @@ class ChatwootClient {
     accountId,
     id,
   }: DeleteContact): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -825,6 +931,9 @@ class ChatwootClient {
     accountId,
     id,
   }: GetContactConversations): Promise<ApiResponse<Conversation[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -844,6 +953,9 @@ class ChatwootClient {
     sort,
     page,
   }: SearchContacts): Promise<ApiResponse<SearchContactsResponse>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -865,6 +977,9 @@ class ChatwootClient {
     page,
     payload,
   }: FilterContacts): Promise<ApiResponse<ContactFilterResponse[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -892,6 +1007,9 @@ class ChatwootClient {
     assigneeId,
     teamId,
   }: AssignConversation): Promise<ApiResponse<Assignee>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -919,6 +1037,9 @@ class ChatwootClient {
     accountId,
     conversationId,
   }: ListConversationLabels): Promise<ApiResponse<LabelsPayload>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -937,6 +1058,9 @@ class ChatwootClient {
     conversationId,
     labels,
   }: AddConversationLabels): Promise<ApiResponse<LabelsPayload>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -964,6 +1088,9 @@ class ChatwootClient {
     teamId,
     labels,
   }: GetConversationCounts): Promise<ApiResponse<ConversationCounts>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -987,6 +1114,9 @@ class ChatwootClient {
     labels,
     page,
   }: ListConversations): Promise<ApiResponse<ConversationListResponse>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1024,6 +1154,9 @@ class ChatwootClient {
     teamId,
     message,
   }: CreateConversation): Promise<ApiResponse<Conversation>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1063,6 +1196,9 @@ class ChatwootClient {
     page,
     payload,
   }: FilterConversations): Promise<ApiResponse<ConversationFilterResponse>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1088,6 +1224,9 @@ class ChatwootClient {
     accountId,
     conversationId,
   }: GetConversationDetails): Promise<ApiResponse<ConversationDetails>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1110,6 +1249,9 @@ class ChatwootClient {
     conversationId,
     status,
   }: ToggleConversationStatus): Promise<ApiResponse<ToggleStatusResponse>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1138,6 +1280,9 @@ class ChatwootClient {
     conversationId,
     priority,
   }: ToggleConversationPriority): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1165,6 +1310,9 @@ class ChatwootClient {
     accountId,
     attributeModel,
   }: ListCustomAttributes): Promise<ApiResponse<CustomAttribute[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1190,6 +1338,9 @@ class ChatwootClient {
     attribute_values,
     attribute_model,
   }: AddCustomAttribute): Promise<ApiResponse<CustomAttribute>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1212,6 +1363,9 @@ class ChatwootClient {
     accountId,
     id,
   }: GetCustomAttributeDetails): Promise<ApiResponse<CustomAttribute>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1235,6 +1389,9 @@ class ChatwootClient {
     attribute_values,
     attribute_model,
   }: UpdateCustomAttribute): Promise<ApiResponse<CustomAttribute>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1260,6 +1417,9 @@ class ChatwootClient {
     accountId,
     id,
   }: DeleteCustomAttribute): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1281,6 +1441,9 @@ class ChatwootClient {
     accountId,
     filterType,
   }: ListCustomFilters): Promise<ApiResponse<CustomFilter[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1303,6 +1466,9 @@ class ChatwootClient {
     type,
     query,
   }: AddCustomFilter): Promise<ApiResponse<CustomFilter>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1322,6 +1488,9 @@ class ChatwootClient {
     accountId,
     customFilterId,
   }: GetCustomFilterDetails): Promise<ApiResponse<CustomFilter>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1342,6 +1511,9 @@ class ChatwootClient {
     type,
     query,
   }: UpdateCustomFilter): Promise<ApiResponse<CustomFilter>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1364,6 +1536,9 @@ class ChatwootClient {
     accountId,
     customFilterId,
   }: DeleteCustomFilter): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1384,6 +1559,9 @@ class ChatwootClient {
   public async listInboxes({
     accountId,
   }: ListInboxes): Promise<ApiResponse<Inbox[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1398,6 +1576,9 @@ class ChatwootClient {
     accountId,
     id,
   }: GetInboxDetails): Promise<ApiResponse<Inbox>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1417,6 +1598,9 @@ class ChatwootClient {
     avatar,
     channel,
   }: CreateInbox): Promise<ApiResponse<Inbox>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1440,6 +1624,9 @@ class ChatwootClient {
     avatar,
     channel,
   }: UpdateInbox): Promise<ApiResponse<Inbox>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1463,6 +1650,9 @@ class ChatwootClient {
     accountId,
     inboxId,
   }: ListInboxAgents): Promise<ApiResponse<InboxAgent[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1481,6 +1671,9 @@ class ChatwootClient {
     inboxId,
     user_ids,
   }: AddInboxAgent): Promise<ApiResponse<InboxAgent[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1500,6 +1693,9 @@ class ChatwootClient {
     inboxId,
     user_ids,
   }: UpdateInboxAgents): Promise<ApiResponse<InboxAgent[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1519,6 +1715,9 @@ class ChatwootClient {
     inboxId,
     user_ids,
   }: RemoveInboxAgent): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1542,6 +1741,9 @@ class ChatwootClient {
   public async listIntegrations({
     accountId,
   }: ListIntegrations): Promise<ApiResponse<Integration[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1558,6 +1760,9 @@ class ChatwootClient {
     inbox_id,
     settings,
   }: CreateIntegrationHook): Promise<ApiResponse<IntegrationHook>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1578,6 +1783,9 @@ class ChatwootClient {
     hook_id,
     settings,
   }: UpdateIntegrationHook): Promise<ApiResponse<IntegrationHook>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1598,6 +1806,9 @@ class ChatwootClient {
     accountId,
     hook_id,
   }: DeleteIntegrationHook): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1619,6 +1830,9 @@ class ChatwootClient {
     accountId,
     conversationId,
   }: GetMessages): Promise<ApiResponse<Message[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1642,6 +1856,9 @@ class ChatwootClient {
     content_attributes,
     template_params,
   }: CreateMessage): Promise<ApiResponse<Message>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1674,6 +1891,9 @@ class ChatwootClient {
     conversationId,
     messageId,
   }: DeleteMessage): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1702,6 +1922,9 @@ class ChatwootClient {
     since,
     until,
   }: GetAccountReports): Promise<ApiResponse<Report[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1725,6 +1948,9 @@ class ChatwootClient {
     since,
     until,
   }: GetAccountReportsSummary): Promise<ApiResponse<ReportSummary>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1742,6 +1968,9 @@ class ChatwootClient {
     accountId,
     type,
   }: GetAccountConversationMetrics): Promise<ApiResponse<ConversationMetrics>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1765,6 +1994,9 @@ class ChatwootClient {
   }: GetAgentConversationMetrics): Promise<
     ApiResponse<AgentConversationMetrics[]>
   > {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1791,6 +2023,9 @@ class ChatwootClient {
   public async listTeams({
     accountId,
   }: ListTeams): Promise<ApiResponse<Team[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1807,6 +2042,9 @@ class ChatwootClient {
     description,
     allow_auto_assign,
   }: CreateTeam): Promise<ApiResponse<Team>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1826,6 +2064,9 @@ class ChatwootClient {
     accountId,
     teamId,
   }: GetTeamDetails): Promise<ApiResponse<Team>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1846,6 +2087,9 @@ class ChatwootClient {
     description,
     allow_auto_assign,
   }: UpdateTeam): Promise<ApiResponse<Team>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1868,6 +2112,9 @@ class ChatwootClient {
     accountId,
     teamId,
   }: DeleteTeam): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1885,6 +2132,9 @@ class ChatwootClient {
     accountId,
     teamId,
   }: ListTeamAgents): Promise<ApiResponse<TeamAgent[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1903,6 +2153,9 @@ class ChatwootClient {
     teamId,
     user_ids,
   }: AddTeamAgent): Promise<ApiResponse<TeamAgent[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1921,6 +2174,9 @@ class ChatwootClient {
     teamId,
     user_ids,
   }: UpdateTeamAgents): Promise<ApiResponse<TeamAgent[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1939,6 +2195,9 @@ class ChatwootClient {
     teamId,
     user_ids,
   }: RemoveTeamAgent): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1961,6 +2220,9 @@ class ChatwootClient {
   public async listWebhooks({
     accountId,
   }: ListWebhooks): Promise<ApiResponse<Webhook[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1976,6 +2238,9 @@ class ChatwootClient {
     url,
     subscriptions,
   }: AddWebhook): Promise<ApiResponse<Webhook>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -1996,6 +2261,9 @@ class ChatwootClient {
     url,
     subscriptions,
   }: UpdateWebhook): Promise<ApiResponse<Webhook>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2017,6 +2285,9 @@ class ChatwootClient {
     accountId,
     webhook_id,
   }: DeleteWebhook): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2038,6 +2309,9 @@ class ChatwootClient {
     accountId,
     page,
   }: ListAutomationRules): Promise<ApiResponse<AutomationRule[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2060,6 +2334,9 @@ class ChatwootClient {
     actions,
     conditions,
   }: AddAutomationRule): Promise<ApiResponse<AutomationRule>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2082,6 +2359,9 @@ class ChatwootClient {
     accountId,
     id,
   }: GetAutomationRuleDetails): Promise<ApiResponse<AutomationRule>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2105,6 +2385,9 @@ class ChatwootClient {
     actions,
     conditions,
   }: UpdateAutomationRule): Promise<ApiResponse<AutomationRule>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2130,6 +2413,9 @@ class ChatwootClient {
     accountId,
     id,
   }: DeleteAutomationRule): Promise<ApiResponse<void>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2159,6 +2445,9 @@ class ChatwootClient {
     slug,
     page_title,
   }: AddPortal): Promise<ApiResponse<Portal>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2183,6 +2472,9 @@ class ChatwootClient {
   public async listPortals({
     accountId,
   }: ListPortals): Promise<ApiResponse<Portal[]>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2205,6 +2497,9 @@ class ChatwootClient {
     slug,
     page_title,
   }: UpdatePortal): Promise<ApiResponse<Portal>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2237,6 +2532,9 @@ class ChatwootClient {
     associated_category_id,
     parent_category_id,
   }: AddCategory): Promise<ApiResponse<Category>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
@@ -2274,6 +2572,9 @@ class ChatwootClient {
     folder_id,
     associated_article_id,
   }: AddArticle): Promise<ApiResponse<Article>> {
+    if (!this.config.userToken) {
+      return { success: false, error: "userToken is required" };
+    }
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }

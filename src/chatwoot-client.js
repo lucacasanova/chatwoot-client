@@ -40,8 +40,11 @@ var axios_1 = require("axios");
 var ChatwootClient = /** @class */ (function () {
     function ChatwootClient(config) {
         this.version = "1";
-        if (!config.host || !config.token) {
-            throw new Error("Host and token are required");
+        if (!config.host) {
+            throw new Error("Host is required");
+        }
+        if (!config.userToken || !config.platformToken) {
+            throw new Error("userToken or platformToken is required");
         }
         if (config.version) {
             this.version = config.version;
@@ -51,8 +54,11 @@ var ChatwootClient = /** @class */ (function () {
             baseURL: config.host,
             headers: {},
         };
-        if (config.token) {
-            options.headers["api_access_token"] = config.token;
+        if (config.userToken) {
+            options.headers["api_access_token"] = config.userToken;
+        }
+        if (config.platformToken) {
+            options.headers["api_access_token"] = config.platformToken;
         }
         this.axiosInstance = axios_1.default.create(options);
     }
@@ -125,6 +131,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var name = _b.name;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/platform/api/v".concat(_this.version, "/accounts"), {
                             name: name,
@@ -138,6 +147,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -152,6 +164,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, name = _b.name;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -169,6 +184,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -186,6 +204,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -200,6 +221,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, userId = _b.userId, role = _b.role;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -220,6 +244,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, userId = _b.userId;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -239,6 +266,9 @@ var ChatwootClient = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.get("/platform/api/v".concat(_this.version, "/agent_bots"));
                     })];
@@ -250,6 +280,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var name = _b.name, description = _b.description, outgoing_url = _b.outgoing_url;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/platform/api/v".concat(_this.version, "/agent_bots"), {
                             name: name,
@@ -265,6 +298,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.get("/platform/api/v".concat(_this.version, "/agent_bots/").concat(id));
                     })];
@@ -276,6 +312,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var id = _b.id, name = _b.name, description = _b.description, outgoing_url = _b.outgoing_url;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.patch("/platform/api/v".concat(_this.version, "/agent_bots/").concat(id), {
                             name: name,
@@ -291,6 +330,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.delete("/platform/api/v".concat(_this.version, "/agent_bots/").concat(id));
                     })];
@@ -305,6 +347,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var name = _b.name, email = _b.email, password = _b.password, customAttributes = _b.customAttributes;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/platform/api/v".concat(_this.version, "/users"), {
                             name: name,
@@ -321,6 +366,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.get("/platform/api/v".concat(_this.version, "/users/").concat(id));
                     })];
@@ -332,6 +380,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var id = _b.id, name = _b.name, email = _b.email, password = _b.password, customAttributes = _b.customAttributes;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 if (!id) {
                     return [2 /*return*/, { success: false, error: "id is required" }];
                 }
@@ -351,6 +402,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 if (!id) {
                     return [2 /*return*/, { success: false, error: "id is required" }];
                 }
@@ -365,6 +419,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.platformToken) {
+                    return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.get("/platform/api/v".concat(_this.version, "/users/").concat(id, "/login"));
                     })];
@@ -379,6 +436,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -393,6 +453,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, name = _b.name, description = _b.description, outgoing_url = _b.outgoing_url;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -411,6 +474,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -428,6 +494,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id, name = _b.name, description = _b.description, outgoing_url = _b.outgoing_url;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -449,6 +518,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -469,6 +541,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -483,6 +558,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, name = _b.name, email = _b.email, role = _b.role, availabilityStatus = _b.availabilityStatus, autoOffline = _b.autoOffline;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -512,6 +590,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id, role = _b.role, availability = _b.availability, autoOffline = _b.autoOffline;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -536,6 +617,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -553,6 +637,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -567,6 +654,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, content = _b.content, short_code = _b.short_code;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -584,6 +674,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -604,6 +697,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, sort = _b.sort, page = _b.page;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -620,6 +716,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, inboxId = _b.inboxId, name = _b.name, email = _b.email, phoneNumber = _b.phoneNumber, avatar = _b.avatar, avatarUrl = _b.avatarUrl, identifier = _b.identifier, customAttributes = _b.customAttributes;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -646,6 +745,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -663,6 +765,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id, name = _b.name, email = _b.email, phoneNumber = _b.phoneNumber, avatar = _b.avatar, avatarUrl = _b.avatarUrl, identifier = _b.identifier, customAttributes = _b.customAttributes;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -688,6 +793,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -705,6 +813,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -722,6 +833,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, q = _b.q, sort = _b.sort, page = _b.page;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -741,6 +855,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, page = _b.page, payload = _b.payload;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -764,6 +881,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId, assigneeId = _b.assigneeId, teamId = _b.teamId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -790,6 +910,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -807,6 +930,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId, labels = _b.labels;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -829,6 +955,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, status = _b.status, q = _b.q, inboxId = _b.inboxId, teamId = _b.teamId, labels = _b.labels;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -845,6 +974,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, assigneeType = _b.assigneeType, status = _b.status, q = _b.q, inboxId = _b.inboxId, teamId = _b.teamId, labels = _b.labels, page = _b.page;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -872,6 +1004,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, sourceId = _b.sourceId, inboxId = _b.inboxId, contactId = _b.contactId, additionalAttributes = _b.additionalAttributes, customAttributes = _b.customAttributes, status = _b.status, assigneeId = _b.assigneeId, teamId = _b.teamId, message = _b.message;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -908,6 +1043,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, page = _b.page, payload = _b.payload;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -931,6 +1069,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -951,6 +1092,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId, status = _b.status;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -976,6 +1120,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId, priority = _b.priority;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1001,6 +1148,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, attributeModel = _b.attributeModel;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1020,6 +1170,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, attribute_display_name = _b.attribute_display_name, attribute_display_type = _b.attribute_display_type, attribute_description = _b.attribute_description, attribute_key = _b.attribute_key, attribute_values = _b.attribute_values, attribute_model = _b.attribute_model;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1041,6 +1194,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1058,6 +1214,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id, attribute_display_name = _b.attribute_display_name, attribute_display_type = _b.attribute_display_type, attribute_description = _b.attribute_description, attribute_key = _b.attribute_key, attribute_values = _b.attribute_values, attribute_model = _b.attribute_model;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1082,6 +1241,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1102,6 +1264,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, filterType = _b.filterType;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1121,6 +1286,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, name = _b.name, type = _b.type, query = _b.query;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1139,6 +1307,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, customFilterId = _b.customFilterId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1156,6 +1327,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, customFilterId = _b.customFilterId, name = _b.name, type = _b.type, query = _b.query;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1177,6 +1351,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, customFilterId = _b.customFilterId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1197,6 +1374,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1211,6 +1391,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1228,6 +1411,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, name = _b.name, avatar = _b.avatar, channel = _b.channel;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1246,6 +1432,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id, name = _b.name, enable_auto_assignment = _b.enable_auto_assignment, avatar = _b.avatar, channel = _b.channel;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1268,6 +1457,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, inboxId = _b.inboxId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1285,6 +1477,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, inboxId = _b.inboxId, user_ids = _b.user_ids;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1302,6 +1497,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, inboxId = _b.inboxId, user_ids = _b.user_ids;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1319,6 +1517,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, inboxId = _b.inboxId, user_ids = _b.user_ids;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1341,6 +1542,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1355,6 +1559,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, app_id = _b.app_id, inbox_id = _b.inbox_id, settings = _b.settings;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1373,6 +1580,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, hook_id = _b.hook_id, settings = _b.settings;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1392,6 +1602,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, hook_id = _b.hook_id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1412,6 +1625,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1429,6 +1645,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId, content = _b.content, message_type = _b.message_type, isPrivate = _b.private, content_type = _b.content_type, content_attributes = _b.content_attributes, template_params = _b.template_params;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1459,6 +1678,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId, messageId = _b.messageId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1482,6 +1704,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, metric = _b.metric, type = _b.type, id = _b.id, since = _b.since, until = _b.until;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1504,6 +1729,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, type = _b.type, id = _b.id, since = _b.since, until = _b.until;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1523,6 +1751,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, type = _b.type;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1542,6 +1773,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, type = _b.type, user_id = _b.user_id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1567,6 +1801,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1581,6 +1818,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, name = _b.name, description = _b.description, allow_auto_assign = _b.allow_auto_assign;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1599,6 +1839,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, teamId = _b.teamId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1616,6 +1859,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, teamId = _b.teamId, name = _b.name, description = _b.description, allow_auto_assign = _b.allow_auto_assign;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1637,6 +1883,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, teamId = _b.teamId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1654,6 +1903,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, teamId = _b.teamId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1671,6 +1923,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, teamId = _b.teamId, user_ids = _b.user_ids;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1687,6 +1942,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, teamId = _b.teamId, user_ids = _b.user_ids;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1703,6 +1961,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, teamId = _b.teamId, user_ids = _b.user_ids;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1724,6 +1985,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1738,6 +2002,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, url = _b.url, subscriptions = _b.subscriptions;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1755,6 +2022,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, webhook_id = _b.webhook_id, url = _b.url, subscriptions = _b.subscriptions;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1775,6 +2045,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, webhook_id = _b.webhook_id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1795,6 +2068,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, page = _b.page;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1811,6 +2087,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, name = _b.name, description = _b.description, event_name = _b.event_name, active = _b.active, actions = _b.actions, conditions = _b.conditions;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1832,6 +2111,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1849,6 +2131,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id, name = _b.name, description = _b.description, event_name = _b.event_name, active = _b.active, actions = _b.actions, conditions = _b.conditions;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1873,6 +2158,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, id = _b.id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1893,6 +2181,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, archived = _b.archived, color = _b.color, config = _b.config, custom_domain = _b.custom_domain, header_text = _b.header_text, homepage_link = _b.homepage_link, name = _b.name, slug = _b.slug, page_title = _b.page_title;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1917,6 +2208,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1931,6 +2225,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, archived = _b.archived, color = _b.color, config = _b.config, custom_domain = _b.custom_domain, header_text = _b.header_text, homepage_link = _b.homepage_link, name = _b.name, slug = _b.slug, page_title = _b.page_title;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1955,6 +2252,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, portalId = _b.portalId, description = _b.description, locale = _b.locale, name = _b.name, slug = _b.slug, position = _b.position, associated_category_id = _b.associated_category_id, parent_category_id = _b.parent_category_id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
@@ -1980,6 +2280,9 @@ var ChatwootClient = /** @class */ (function () {
             var _this = this;
             var accountId = _b.accountId, portalId = _b.portalId, content = _b.content, meta = _b.meta, position = _b.position, status = _b.status, title = _b.title, slug = _b.slug, views = _b.views, author_id = _b.author_id, category_id = _b.category_id, folder_id = _b.folder_id, associated_article_id = _b.associated_article_id;
             return __generator(this, function (_c) {
+                if (!this.config.userToken) {
+                    return [2 /*return*/, { success: false, error: "userToken is required" }];
+                }
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
