@@ -19,6 +19,39 @@ declare module "chatwoot-client" {
   interface Account {
     id: number;
     name: string;
+    locale: string;
+    domain: string | null;
+    support_email: string;
+    features: {
+      inbound_emails: boolean;
+      channel_email: boolean;
+      channel_facebook: boolean;
+      channel_twitter: boolean;
+      help_center: boolean;
+      macros: boolean;
+      agent_management: boolean;
+      team_management: boolean;
+      inbox_management: boolean;
+      labels: boolean;
+      custom_attributes: boolean;
+      automations: boolean;
+      canned_responses: boolean;
+      integrations: boolean;
+      voice_recorder: boolean;
+      channel_website: boolean;
+      campaigns: boolean;
+      reports: boolean;
+      crm: boolean;
+      auto_resolve_conversations: boolean;
+      send_agent_name_in_whatsapp_message: boolean;
+      read_message: boolean;
+      agent_conversation_viewed: boolean;
+      channel_whatsapp: boolean;
+      channel_api: boolean;
+    };
+    custom_attributes: Record<string, any>;
+    limits: Record<string, any>;
+    status: "active" | "inactive";
   }
 
   interface CreateAccount {
