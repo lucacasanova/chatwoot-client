@@ -223,7 +223,7 @@ class ChatwootClient {
     name,
   }: CreateAccount): Promise<ApiResponse<Account>> {
     return this.requestWithRetry(() =>
-      this.axiosInstance.post("/platform/api/v${this.version}/accounts", {
+      this.axiosInstance.post(`/platform/api/v${this.version}/accounts`, {
         name,
       })
     );

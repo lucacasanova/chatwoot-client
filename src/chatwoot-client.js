@@ -126,7 +126,7 @@ var ChatwootClient = /** @class */ (function () {
             var name = _b.name;
             return __generator(this, function (_c) {
                 return [2 /*return*/, this.requestWithRetry(function () {
-                        return _this.axiosInstance.post("/platform/api/v${this.version}/accounts", {
+                        return _this.axiosInstance.post("/platform/api/v".concat(_this.version, "/accounts"), {
                             name: name,
                         });
                     })];
