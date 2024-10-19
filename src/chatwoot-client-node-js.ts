@@ -168,12 +168,6 @@ class ChatwootClient {
       baseURL: config.host,
       headers: {},
     };
-    if (config.userToken) {
-      options.headers["api_access_token"] = config.userToken;
-    }
-    if (config.platformToken) {
-      options.headers["api_access_token"] = config.platformToken;
-    }
     this.axiosInstance = axios.create(options);
   }
 
@@ -230,9 +224,17 @@ class ChatwootClient {
       return { success: false, error: "platformToken is required" };
     }
     return this.requestWithRetry(() =>
-      this.axiosInstance.post(`/platform/api/v${this.version}/accounts`, {
-        name,
-      })
+      this.axiosInstance.post(
+        `/platform/api/v${this.version}/accounts`,
+        {
+          name,
+        },
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
+      )
     );
   }
 
@@ -247,7 +249,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/platform/api/v${this.version}/accounts/${accountId}`
+        `/platform/api/v${this.version}/accounts/${accountId}`,
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
       )
     );
   }
@@ -268,7 +275,12 @@ class ChatwootClient {
     return this.requestWithRetry(() =>
       this.axiosInstance.patch(
         `/platform/api/v${this.version}/accounts/${accountId}`,
-        { name }
+        { name },
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
       )
     );
   }
@@ -284,7 +296,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/platform/api/v${this.version}/accounts/${accountId}`
+        `/platform/api/v${this.version}/accounts/${accountId}`,
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
       )
     );
   }
@@ -304,7 +321,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/platform/api/v${this.version}/accounts/${accountId}/account_users`
+        `/platform/api/v${this.version}/accounts/${accountId}/account_users`,
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
       )
     );
   }
@@ -329,7 +351,12 @@ class ChatwootClient {
     return this.requestWithRetry(() =>
       this.axiosInstance.post(
         `/platform/api/v${this.version}/accounts/${accountId}/account_users`,
-        { user_id: userId, role }
+        { user_id: userId, role },
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
       )
     );
   }
@@ -350,7 +377,12 @@ class ChatwootClient {
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
         `/platform/api/v${this.version}/accounts/${accountId}/account_users`,
-        { data: { user_id: userId } }
+        {
+          data: { user_id: userId },
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
       )
     );
   }
@@ -364,7 +396,11 @@ class ChatwootClient {
       return { success: false, error: "platformToken is required" };
     }
     return this.requestWithRetry(() =>
-      this.axiosInstance.get(`/platform/api/v${this.version}/agent_bots`)
+      this.axiosInstance.get(`/platform/api/v${this.version}/agent_bots`, {
+        headers: {
+          api_access_token: this.config.platformToken,
+        },
+      })
     );
   }
 
@@ -377,11 +413,19 @@ class ChatwootClient {
       return { success: false, error: "platformToken is required" };
     }
     return this.requestWithRetry(() =>
-      this.axiosInstance.post(`/platform/api/v${this.version}/agent_bots`, {
-        name,
-        description,
-        outgoing_url,
-      })
+      this.axiosInstance.post(
+        `/platform/api/v${this.version}/agent_bots`,
+        {
+          name,
+          description,
+          outgoing_url,
+        },
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
+      )
     );
   }
 
@@ -392,7 +436,14 @@ class ChatwootClient {
       return { success: false, error: "platformToken is required" };
     }
     return this.requestWithRetry(() =>
-      this.axiosInstance.get(`/platform/api/v${this.version}/agent_bots/${id}`)
+      this.axiosInstance.get(
+        `/platform/api/v${this.version}/agent_bots/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
+      )
     );
   }
 
@@ -412,6 +463,11 @@ class ChatwootClient {
           name,
           description,
           outgoing_url,
+        },
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
         }
       )
     );
@@ -425,7 +481,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/platform/api/v${this.version}/agent_bots/${id}`
+        `/platform/api/v${this.version}/agent_bots/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
       )
     );
   }
@@ -444,12 +505,20 @@ class ChatwootClient {
       return { success: false, error: "platformToken is required" };
     }
     return this.requestWithRetry(() =>
-      this.axiosInstance.post(`/platform/api/v${this.version}/users`, {
-        name,
-        email,
-        password,
-        custom_attributes: customAttributes,
-      })
+      this.axiosInstance.post(
+        `/platform/api/v${this.version}/users`,
+        {
+          name,
+          email,
+          password,
+          custom_attributes: customAttributes,
+        },
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
+      )
     );
   }
 
@@ -460,7 +529,11 @@ class ChatwootClient {
       return { success: false, error: "platformToken is required" };
     }
     return this.requestWithRetry(() =>
-      this.axiosInstance.get(`/platform/api/v${this.version}/users/${id}`)
+      this.axiosInstance.get(`/platform/api/v${this.version}/users/${id}`, {
+        headers: {
+          api_access_token: this.config.platformToken,
+        },
+      })
     );
   }
 
@@ -478,12 +551,20 @@ class ChatwootClient {
       return { success: false, error: "id is required" };
     }
     return this.requestWithRetry(() =>
-      this.axiosInstance.patch(`/platform/api/v${this.version}/users/${id}`, {
-        name,
-        email,
-        password,
-        custom_attributes: customAttributes,
-      })
+      this.axiosInstance.patch(
+        `/platform/api/v${this.version}/users/${id}`,
+        {
+          name,
+          email,
+          password,
+          custom_attributes: customAttributes,
+        },
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
+      )
     );
   }
 
@@ -495,7 +576,11 @@ class ChatwootClient {
       return { success: false, error: "id is required" };
     }
     return this.requestWithRetry(() =>
-      this.axiosInstance.delete(`/platform/api/v${this.version}/users/${id}`)
+      this.axiosInstance.delete(`/platform/api/v${this.version}/users/${id}`, {
+        headers: {
+          api_access_token: this.config.platformToken,
+        },
+      })
     );
   }
 
@@ -506,7 +591,14 @@ class ChatwootClient {
       return { success: false, error: "platformToken is required" };
     }
     return this.requestWithRetry(() =>
-      this.axiosInstance.get(`/platform/api/v${this.version}/users/${id}/login`)
+      this.axiosInstance.get(
+        `/platform/api/v${this.version}/users/${id}/login`,
+        {
+          headers: {
+            api_access_token: this.config.platformToken,
+          },
+        }
+      )
     );
   }
 
@@ -525,7 +617,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/agent_bots`
+        `/api/v${this.version}/accounts/${accountId}/agent_bots`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -549,6 +646,11 @@ class ChatwootClient {
           name,
           description,
           outgoing_url,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -569,7 +671,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/agent_bots/${id}`
+        `/api/v${this.version}/accounts/${accountId}/agent_bots/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -597,6 +704,11 @@ class ChatwootClient {
           name,
           description,
           outgoing_url,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -617,7 +729,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/agent_bots/${id}`
+        `/api/v${this.version}/accounts/${accountId}/agent_bots/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -637,7 +754,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/agents`
+        `/api/v${this.version}/accounts/${accountId}/agents`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -674,6 +796,11 @@ class ChatwootClient {
           role,
           availability_status: availabilityStatus,
           auto_offline: autoOffline,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -705,6 +832,11 @@ class ChatwootClient {
           role,
           availability,
           auto_offline: autoOffline,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -722,7 +854,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/agents/${id}`
+        `/api/v${this.version}/accounts/${accountId}/agents/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -742,7 +879,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/canned_responses`
+        `/api/v${this.version}/accounts/${accountId}/canned_responses`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -764,6 +906,11 @@ class ChatwootClient {
         {
           content,
           short_code,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -784,7 +931,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/canned_responses/${id}`
+        `/api/v${this.version}/accounts/${accountId}/canned_responses/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -809,6 +961,9 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/contacts`,
         {
           params: { sort, page },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -846,6 +1001,11 @@ class ChatwootClient {
           avatar_url: avatarUrl,
           identifier,
           custom_attributes: customAttributes,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -866,7 +1026,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/contacts/${id}`
+        `/api/v${this.version}/accounts/${accountId}/contacts/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -902,6 +1067,11 @@ class ChatwootClient {
           avatar_url: avatarUrl,
           identifier,
           custom_attributes: customAttributes,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -922,7 +1092,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/contacts/${id}`
+        `/api/v${this.version}/accounts/${accountId}/contacts/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -942,7 +1117,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/contacts/${id}/conversations`
+        `/api/v${this.version}/accounts/${accountId}/contacts/${id}/conversations`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -967,6 +1147,9 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/contacts/search`,
         {
           params: { q, sort, page },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -992,6 +1175,11 @@ class ChatwootClient {
         {
           page,
           payload,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1028,6 +1216,11 @@ class ChatwootClient {
         {
           assignee_id: assigneeId,
           team_id: teamId,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1048,7 +1241,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/labels`
+        `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/labels`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1075,6 +1273,11 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/labels`,
         {
           labels,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1099,6 +1302,9 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/conversations/meta`,
         {
           params: { status, q, inbox_id: inboxId, team_id: teamId, labels },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1132,6 +1338,10 @@ class ChatwootClient {
             team_id: teamId,
             labels,
             page,
+          },
+
+          headers: {
+            api_access_token: this.config.userToken,
           },
         }
       )
@@ -1182,6 +1392,11 @@ class ChatwootClient {
           assignee_id: assigneeId,
           team_id: teamId,
           message,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1211,6 +1426,11 @@ class ChatwootClient {
         {
           page,
           payload,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1235,7 +1455,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}`
+        `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1266,6 +1491,11 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/toggle_status`,
         {
           status,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1297,6 +1527,11 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/toggle_priority`,
         {
           priority,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1324,6 +1559,9 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/custom_attribute_definitions`,
         {
           params: { attribute_model: attributeModel },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1354,6 +1592,11 @@ class ChatwootClient {
           attribute_key,
           attribute_values,
           attribute_model,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1374,7 +1617,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/custom_attribute_definitions/${id}`
+        `/api/v${this.version}/accounts/${accountId}/custom_attribute_definitions/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1408,6 +1656,11 @@ class ChatwootClient {
           attribute_key,
           attribute_values,
           attribute_model,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1428,7 +1681,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/custom_attribute_definitions/${id}`
+        `/api/v${this.version}/accounts/${accountId}/custom_attribute_definitions/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1455,6 +1713,9 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/custom_filters`,
         {
           params: { filter_type: filterType },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1479,6 +1740,11 @@ class ChatwootClient {
           name,
           type,
           query,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1499,7 +1765,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/custom_filters/${customFilterId}`
+        `/api/v${this.version}/accounts/${accountId}/custom_filters/${customFilterId}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1527,6 +1798,11 @@ class ChatwootClient {
           name,
           type,
           query,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1547,7 +1823,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/custom_filters/${customFilterId}`
+        `/api/v${this.version}/accounts/${accountId}/custom_filters/${customFilterId}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1567,7 +1848,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/inboxes`
+        `/api/v${this.version}/accounts/${accountId}/inboxes`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1587,7 +1873,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/inboxes/${id}`
+        `/api/v${this.version}/accounts/${accountId}/inboxes/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1611,6 +1902,11 @@ class ChatwootClient {
           name,
           avatar,
           channel,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1641,6 +1937,11 @@ class ChatwootClient {
           enable_auto_assignment,
           avatar,
           channel,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1661,7 +1962,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/inbox_members/${inboxId}`
+        `/api/v${this.version}/accounts/${accountId}/inbox_members/${inboxId}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1683,6 +1989,11 @@ class ChatwootClient {
         {
           inbox_id: inboxId,
           user_ids,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1705,6 +2016,11 @@ class ChatwootClient {
         {
           inbox_id: inboxId,
           user_ids,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1729,6 +2045,9 @@ class ChatwootClient {
             inbox_id: inboxId,
             user_ids,
           },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1749,7 +2068,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/integrations/apps`
+        `/api/v${this.version}/accounts/${accountId}/integrations/apps`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1773,6 +2097,11 @@ class ChatwootClient {
           app_id,
           inbox_id,
           settings,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1797,6 +2126,11 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/integrations/hooks/${hook_id}`,
         {
           settings,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1817,7 +2151,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/integrations/hooks/${hook_id}`
+        `/api/v${this.version}/accounts/${accountId}/integrations/hooks/${hook_id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1841,7 +2180,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/messages`
+        `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/messages`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1881,6 +2225,11 @@ class ChatwootClient {
           content_type,
           content_attributes,
           template_params,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -1905,7 +2254,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/messages/${messageId}`
+        `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/messages/${messageId}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -1937,6 +2291,9 @@ class ChatwootClient {
     return this.requestWithRetry(() =>
       this.axiosInstance.get(`/api/v2/accounts/${accountId}/reports`, {
         params: { metric, type, id, since, until },
+        headers: {
+          api_access_token: this.config.userToken,
+        },
       })
     );
   }
@@ -1960,6 +2317,9 @@ class ChatwootClient {
     return this.requestWithRetry(() =>
       this.axiosInstance.get(`/api/v2/accounts/${accountId}/reports/summary`, {
         params: { type, id, since, until },
+        headers: {
+          api_access_token: this.config.userToken,
+        },
       })
     );
   }
@@ -1982,6 +2342,9 @@ class ChatwootClient {
         `/api/v2/accounts/${accountId}/reports/conversations`,
         {
           params: { type },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2011,6 +2374,9 @@ class ChatwootClient {
         `/api/v2/accounts/${accountId}/reports/conversations`,
         {
           params: { type, user_id },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2031,7 +2397,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/teams`
+        `/api/v${this.version}/accounts/${accountId}/teams`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -2055,6 +2426,11 @@ class ChatwootClient {
           name,
           description,
           allow_auto_assign,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2075,7 +2451,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/teams/${teamId}`
+        `/api/v${this.version}/accounts/${accountId}/teams/${teamId}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -2103,6 +2484,11 @@ class ChatwootClient {
           name,
           description,
           allow_auto_assign,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2123,7 +2509,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/teams/${teamId}`
+        `/api/v${this.version}/accounts/${accountId}/teams/${teamId}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -2143,7 +2534,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/teams/${teamId}/team_members`
+        `/api/v${this.version}/accounts/${accountId}/teams/${teamId}/team_members`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -2164,6 +2560,11 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/teams/${teamId}/team_members`,
         {
           user_ids,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2185,6 +2586,11 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/teams/${teamId}/team_members`,
         {
           user_ids,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2208,6 +2614,9 @@ class ChatwootClient {
           data: {
             user_ids,
           },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2228,7 +2637,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/webhooks`
+        `/api/v${this.version}/accounts/${accountId}/webhooks`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -2250,6 +2664,11 @@ class ChatwootClient {
         {
           url,
           subscriptions,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2276,6 +2695,11 @@ class ChatwootClient {
         {
           url,
           subscriptions,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2296,7 +2720,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/webhooks/${webhook_id}`
+        `/api/v${this.version}/accounts/${accountId}/webhooks/${webhook_id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -2320,6 +2749,9 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/automation_rules`,
         {
           params: { page },
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2350,6 +2782,11 @@ class ChatwootClient {
           active,
           actions,
           conditions,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2370,7 +2807,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/automation_rules/${id}`
+        `/api/v${this.version}/accounts/${accountId}/automation_rules/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -2404,6 +2846,11 @@ class ChatwootClient {
           active,
           actions,
           conditions,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2424,7 +2871,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/automation_rules/${id}`
+        `/api/v${this.version}/accounts/${accountId}/automation_rules/${id}`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -2464,6 +2916,11 @@ class ChatwootClient {
           name,
           slug,
           page_title,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2480,7 +2937,12 @@ class ChatwootClient {
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
-        `/api/v${this.version}/accounts/${accountId}/portals`
+        `/api/v${this.version}/accounts/${accountId}/portals`,
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
+        }
       )
     );
   }
@@ -2516,6 +2978,11 @@ class ChatwootClient {
           name,
           slug,
           page_title,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2552,6 +3019,11 @@ class ChatwootClient {
           position,
           associated_category_id,
           parent_category_id,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
@@ -2596,6 +3068,11 @@ class ChatwootClient {
           category_id,
           folder_id,
           associated_article_id,
+        },
+        {
+          headers: {
+            api_access_token: this.config.userToken,
+          },
         }
       )
     );
