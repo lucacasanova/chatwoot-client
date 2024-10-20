@@ -9,14 +9,14 @@ declare module "chatwoot-client-node-js" {
     data?: T;
   }
 
-  interface Config {
+  export interface Config {
     host: string;
     userToken?: string;
     platformToken?: string;
     version?: string;
   }
 
-  interface Account {
+  export interface Account {
     id: number;
     name: string;
     locale: string;
@@ -54,68 +54,68 @@ declare module "chatwoot-client-node-js" {
     status: "active" | "inactive";
   }
 
-  interface CreateAccount {
-    name: string;
+  export interface CreateAccount {
+    name?: string;
   }
 
-  interface GetAccount {
+  export interface GetAccount {
     accountId: number;
   }
 
-  interface UpdateAccount {
+  export interface UpdateAccount {
     accountId: number;
-    name: string;
+    name?: string;
   }
 
-  interface DeleteAccount {
+  export interface DeleteAccount {
     accountId: number;
   }
 
-  interface AccountUser {
+  export interface AccountUser {
     account_id: number;
     user_id: number;
     role: "administrator" | "agent";
   }
 
-  interface ListAccountUsers {
+  export interface ListAccountUsers {
     accountId: number;
   }
 
-  interface CreateAccountUser {
+  export interface CreateAccountUser {
     accountId: number;
     userId: number;
     role: "administrator" | "agent";
   }
 
-  interface DeleteAccountUser {
+  export interface DeleteAccountUser {
     accountId: number;
     userId: number;
   }
 
-  interface ListAgentBots {}
+  export interface ListAgentBots {}
 
-  interface CreateAgentBot {
-    name: string;
-    description: string;
-    outgoing_url: string;
+  export interface CreateAgentBot {
+    name?: string;
+    description?: string;
+    outgoingUrl?: string;
   }
 
-  interface GetAgentBotDetails {
+  export interface GetAgentBotDetails {
     id: number;
   }
 
-  interface UpdateAgentBot {
+  export interface UpdateAgentBot {
     id: number;
-    name: string;
-    description: string;
-    outgoing_url: string;
+    name?: string;
+    description?: string;
+    outgoingUrl?: string;
   }
 
-  interface DeleteAgentBot {
+  export interface DeleteAgentBot {
     id: number;
   }
 
-  interface AgentBot {
+  export interface AgentBot {
     id: number;
     name: string;
     description: string;
@@ -123,18 +123,18 @@ declare module "chatwoot-client-node-js" {
     outgoing_url: string;
   }
 
-  interface CreateUser {
+  export interface CreateUser {
     name?: string;
     email?: string;
     password?: string;
     customAttributes?: Record<string, any>;
   }
 
-  interface GetUserDetails {
+  export interface GetUserDetails {
     id: number;
   }
 
-  interface UserDetails {
+  export interface UserDetails {
     id: number;
     uid: string;
     name: string;
@@ -152,27 +152,27 @@ declare module "chatwoot-client-node-js" {
     }>;
   }
 
-  interface UpdateUser {
+  export interface UpdateUser {
     id: number;
-    name: string;
-    email: string;
-    password: string;
+    name?: string;
+    email?: string;
+    password?: string;
     customAttributes?: Record<string, any>;
   }
 
-  interface DeleteUser {
+  export interface DeleteUser {
     id: number;
   }
 
-  interface GetUserSSOLink {
+  export interface GetUserSSOLink {
     id: number;
   }
 
-  interface UserSSOLink {
+  export interface UserSSOLink {
     url: string;
   }
 
-  interface User {
+  export interface User {
     id: number;
     uid: string;
     name: string;
@@ -190,36 +190,36 @@ declare module "chatwoot-client-node-js" {
     }>;
   }
 
-  interface ListAccountAgentBots {
+  export interface ListAccountAgentBots {
     accountId: number;
   }
 
-  interface CreateAccountAgentBot {
+  export interface CreateAccountAgentBot {
     accountId: number;
-    name: string;
-    description: string;
-    outgoing_url: string;
+    name?: string;
+    description?: string;
+    outgoingUrl?: string;
   }
 
-  interface GetAccountAgentBotDetails {
-    accountId: number;
-    id: number;
-  }
-
-  interface UpdateAccountAgentBot {
-    accountId: number;
-    id: number;
-    name: string;
-    description: string;
-    outgoing_url: string;
-  }
-
-  interface DeleteAccountAgentBot {
+  export interface GetAccountAgentBotDetails {
     accountId: number;
     id: number;
   }
 
-  interface AccountAgentBot {
+  export interface UpdateAccountAgentBot {
+    accountId: number;
+    id: number;
+    name?: string;
+    description?: string;
+    outgoingUrl?: string;
+  }
+
+  export interface DeleteAccountAgentBot {
+    accountId: number;
+    id: number;
+  }
+
+  export interface AccountAgentBot {
     id: number;
     name: string;
     description: string;
@@ -227,11 +227,11 @@ declare module "chatwoot-client-node-js" {
     outgoing_url: string;
   }
 
-  interface ListAgents {
+  export interface ListAgents {
     accountId: number;
   }
 
-  interface AddAgent {
+  export interface AddAgent {
     accountId: number;
     name: string;
     email: string;
@@ -240,7 +240,7 @@ declare module "chatwoot-client-node-js" {
     autoOffline?: boolean;
   }
 
-  interface UpdateAgent {
+  export interface UpdateAgent {
     accountId: number;
     id: number;
     role: "agent" | "administrator";
@@ -248,12 +248,12 @@ declare module "chatwoot-client-node-js" {
     autoOffline?: boolean;
   }
 
-  interface RemoveAgent {
+  export interface RemoveAgent {
     accountId: number;
     id: number;
   }
 
-  interface Agent {
+  export interface Agent {
     id: number;
     uid: string;
     name: string;
@@ -268,29 +268,29 @@ declare module "chatwoot-client-node-js" {
     custom_attributes: Record<string, any>;
   }
 
-  interface ListCannedResponses {
+  export interface ListCannedResponses {
     accountId: number;
   }
 
-  interface AddCannedResponse {
+  export interface AddCannedResponse {
     accountId: number;
-    content: string;
-    short_code: string;
+    content?: string;
+    shortCode?: string;
   }
 
-  interface DeleteCannedResponse {
+  export interface DeleteCannedResponse {
     accountId: number;
     id: number;
   }
 
-  interface CannedResponse {
+  export interface CannedResponse {
     id: number;
     content: string;
     short_code: string;
     account_id: number;
   }
 
-  interface ListContacts {
+  export interface ListContacts {
     accountId: number;
     sort?:
       | "name"
@@ -304,7 +304,7 @@ declare module "chatwoot-client-node-js" {
     page?: number;
   }
 
-  interface ContactPayload {
+  export interface ContactPayload {
     payload: {
       contact: {
         email: string;
@@ -319,7 +319,7 @@ declare module "chatwoot-client-node-js" {
     id: number;
     availability_status: "online" | "offline";
   }
-  interface SearchContacts {
+  export interface SearchContacts {
     accountId: number;
     q: string;
     sort?:
@@ -334,7 +334,7 @@ declare module "chatwoot-client-node-js" {
     page?: number;
   }
 
-  interface ContactListItem {
+  export interface ContactListItem {
     id: number;
     payload: {
       contact: {
@@ -366,11 +366,11 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface SearchContactsResponse {
+  export interface SearchContactsResponse {
     payload: ContactListItem[];
   }
 
-  interface CreateContact {
+  export interface CreateContact {
     accountId: number;
     inboxId: number;
     name?: string;
@@ -382,12 +382,12 @@ declare module "chatwoot-client-node-js" {
     customAttributes?: Record<string, any>;
   }
 
-  interface GetContact {
+  export interface GetContact {
     accountId: number;
     id: number;
   }
 
-  interface UpdateContact {
+  export interface UpdateContact {
     accountId: number;
     id: number;
     name?: string;
@@ -399,12 +399,12 @@ declare module "chatwoot-client-node-js" {
     customAttributes?: Record<string, any>;
   }
 
-  interface DeleteContact {
+  export interface DeleteContact {
     accountId: number;
     id: number;
   }
 
-  interface Contact {
+  export interface Contact {
     id: number;
     email: string;
     name: string;
@@ -415,12 +415,12 @@ declare module "chatwoot-client-node-js" {
     contact_inboxes: Array<Record<string, any>>;
   }
 
-  interface GetContactConversations {
+  export interface GetContactConversations {
     accountId: number;
     id: number;
   }
 
-  interface Conversation {
+  export interface Conversation {
     id: number;
     messages: Array<{
       content: string;
@@ -473,7 +473,7 @@ declare module "chatwoot-client-node-js" {
     display_id: number;
   }
 
-  interface SearchContacts {
+  export interface SearchContacts {
     accountId: number;
     q: string;
     sort?:
@@ -488,7 +488,7 @@ declare module "chatwoot-client-node-js" {
     page?: number;
   }
 
-  interface ContactListItemPayload {
+  export interface ContactListItemPayload {
     id: number;
     payload: {
       contact: {
@@ -520,22 +520,22 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface FilterContacts {
+  export interface FilterContacts {
     accountId: number;
     page?: number;
-    payload: Array<{
-      attribute_key: string;
-      filter_operator:
+    payload?: Array<{
+      attribute_key?: string;
+      filter_operator?:
         | "equal_to"
         | "not_equal_to"
         | "contains"
         | "does_not_contain";
-      values: string[];
+      values?: string[];
       query_operator?: "AND" | "OR";
     }>;
   }
 
-  interface ContactFilterResponse {
+  export interface ContactFilterResponse {
     id: number;
     payload: {
       contact: {
@@ -567,14 +567,14 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface AssignConversation {
+  export interface AssignConversation {
     accountId: number;
     conversationId: number;
     assigneeId?: number;
     teamId?: number;
   }
 
-  interface Assignee {
+  export interface Assignee {
     id: number;
     uid: string;
     name: string;
@@ -592,22 +592,22 @@ declare module "chatwoot-client-node-js" {
     }>;
   }
 
-  interface ListConversationLabels {
+  export interface ListConversationLabels {
     accountId: number;
     conversationId: number;
   }
 
-  interface AddConversationLabels {
+  export interface AddConversationLabels {
     accountId: number;
     conversationId: number;
-    labels: string[];
+    labels?: string[];
   }
 
-  interface LabelsPayload {
+  export interface LabelsPayload {
     payload: string[];
   }
 
-  interface GetConversationCounts {
+  export interface GetConversationCounts {
     accountId: number;
     status?: "open" | "resolved" | "pending" | "snoozed";
     q?: string;
@@ -616,7 +616,7 @@ declare module "chatwoot-client-node-js" {
     labels?: string[];
   }
 
-  interface ConversationCounts {
+  export interface ConversationCounts {
     meta: {
       mine_count: number;
       unassigned_count: number;
@@ -625,7 +625,7 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface ListConversations {
+  export interface ListConversations {
     accountId: number;
     assigneeType?: "me" | "unassigned" | "all" | "assigned";
     status?: "open" | "resolved" | "pending" | "snoozed";
@@ -636,14 +636,14 @@ declare module "chatwoot-client-node-js" {
     page?: number;
   }
 
-  interface ConversationMeta {
+  export interface ConversationMeta {
     mine_count: number;
     unassigned_count: number;
     assigned_count: number;
     all_count: number;
   }
 
-  interface ConversationData {
+  export interface ConversationData {
     id: number;
     messages: Array<{
       content: string;
@@ -692,14 +692,14 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface ConversationListResponse {
+  export interface ConversationListResponse {
     data: {
       meta: ConversationMeta;
       payload: ConversationData[];
     };
   }
 
-  interface CreateConversation {
+  export interface CreateConversation {
     accountId: number;
     sourceId: string;
     inboxId: string;
@@ -709,7 +709,7 @@ declare module "chatwoot-client-node-js" {
     status?: "open" | "resolved" | "pending";
     assigneeId?: string;
     teamId?: string;
-    message: {
+    message?: {
       content: string;
       template_params?: {
         name?: string;
@@ -720,35 +720,35 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface Conversation {
+  export interface Conversation {
     id: number;
     account_id: number;
     inbox_id: number;
   }
 
-  interface FilterConversations {
+  export interface FilterConversations {
     accountId: number;
     page?: number;
-    payload: Array<{
-      attribute_key: string;
-      filter_operator:
+    payload?: Array<{
+      attribute_key?: string;
+      filter_operator?:
         | "equal_to"
         | "not_equal_to"
         | "contains"
         | "does_not_contain";
-      values: string[];
+      values?: string[];
       query_operator?: "AND" | "OR";
     }>;
   }
 
-  interface ConversationMeta {
+  export interface ConversationMeta {
     mine_count: number;
     unassigned_count: number;
     assigned_count: number;
     all_count: number;
   }
 
-  interface ConversationData {
+  export interface ConversationData {
     id: number;
     messages: Array<{
       content: string;
@@ -797,31 +797,31 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface ConversationFilterResponse {
+  export interface ConversationFilterResponse {
     data: {
       meta: ConversationMeta;
       payload: ConversationData[];
     };
   }
 
-  interface GetConversationDetails {
+  export interface GetConversationDetails {
     accountId: number;
     conversationId: number;
   }
 
-  interface ToggleConversationStatus {
+  export interface ToggleConversationStatus {
     accountId: number;
     conversationId: number;
     status: "open" | "resolved" | "pending";
   }
 
-  interface ToggleConversationPriority {
+  export interface ToggleConversationPriority {
     accountId: number;
     conversationId: number;
     priority: "urgent" | "high" | "medium" | "low" | "none";
   }
 
-  interface ConversationDetails {
+  export interface ConversationDetails {
     id: number;
     messages: Array<{
       content: string;
@@ -870,7 +870,7 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface ToggleStatusResponse {
+  export interface ToggleStatusResponse {
     meta: Record<string, any>;
     payload: {
       success: boolean;
@@ -879,43 +879,43 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface ListCustomAttributes {
+  export interface ListCustomAttributes {
     accountId: number;
     attributeModel: "0" | "1";
   }
 
-  interface AddCustomAttribute {
+  export interface AddCustomAttribute {
     accountId: number;
-    attribute_display_name: string;
-    attribute_display_type: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-    attribute_description: string;
-    attribute_key: string;
-    attribute_values: string[];
-    attribute_model: 0 | 1;
+    attributeDisplayName?: string;
+    attributeDisplayType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+    attributeDescription?: string;
+    attributeKey?: string;
+    attributeValues?: string[];
+    attributeModel?: 0 | 1;
   }
 
-  interface GetCustomAttributeDetails {
-    accountId: number;
-    id: number;
-  }
-
-  interface UpdateCustomAttribute {
-    accountId: number;
-    id: number;
-    attribute_display_name: string;
-    attribute_display_type: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-    attribute_description: string;
-    attribute_key: string;
-    attribute_values: string[];
-    attribute_model: 0 | 1;
-  }
-
-  interface DeleteCustomAttribute {
+  export interface GetCustomAttributeDetails {
     accountId: number;
     id: number;
   }
 
-  interface CustomAttribute {
+  export interface UpdateCustomAttribute {
+    accountId: number;
+    id: number;
+    attributeDisplayName?: string;
+    attributeDisplayType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+    attributeDescription?: string;
+    attributeKey?: string;
+    attributeValues?: string[];
+    attributeModel?: 0 | 1;
+  }
+
+  export interface DeleteCustomAttribute {
+    accountId: number;
+    id: number;
+  }
+
+  export interface CustomAttribute {
     id: number;
     attribute_display_name: string;
     attribute_display_type: string;
@@ -927,37 +927,38 @@ declare module "chatwoot-client-node-js" {
     account_id: number;
   }
 
-  interface ListCustomFilters {
+  export interface ListCustomFilters {
     accountId: number;
-    filterType: "conversation" | "contact" | "report";
+    filterType?: "conversation" | "contact" | "report";
   }
 
-  interface AddCustomFilter {
+  export interface AddCustomFilter {
     accountId: number;
-    name: string;
-    type: "conversation" | "contact" | "report";
-    query: Record<string, any>;
+    filterType?: string;
+    name?: string;
+    type?: "conversation" | "contact" | "report";
+    query?: Record<string, any>;
   }
 
-  interface GetCustomFilterDetails {
-    accountId: number;
-    customFilterId: number;
-  }
-
-  interface UpdateCustomFilter {
-    accountId: number;
-    customFilterId: number;
-    name: string;
-    type: "conversation" | "contact" | "report";
-    query: Record<string, any>;
-  }
-
-  interface DeleteCustomFilter {
+  export interface GetCustomFilterDetails {
     accountId: number;
     customFilterId: number;
   }
 
-  interface CustomFilter {
+  export interface UpdateCustomFilter {
+    accountId: number;
+    customFilterId: number;
+    name?: string;
+    type?: "conversation" | "contact" | "report";
+    query?: Record<string, any>;
+  }
+
+  export interface DeleteCustomFilter {
+    accountId: number;
+    customFilterId: number;
+  }
+
+  export interface CustomFilter {
     id: number;
     name: string;
     type: "conversation" | "contact" | "report";
@@ -966,45 +967,45 @@ declare module "chatwoot-client-node-js" {
     updated_at: string;
   }
 
-  interface ListInboxes {
+  export interface ListInboxes {
     accountId: number;
   }
 
-  interface GetInboxDetails {
+  export interface GetInboxDetails {
     accountId: number;
     id: number;
   }
 
-  interface CreateInbox {
+  export interface CreateInbox {
     accountId: number;
-    name: string;
+    name?: string;
     avatar?: string;
-    channel: {
-      type: "web_widget";
-      website_url: string;
-      welcome_title: string;
-      welcome_tagline: string;
+    channel?: {
+      type?: "web_widget";
+      website_url?: string;
+      welcome_title?: string;
+      welcome_tagline?: string;
       agent_away_message?: string;
       widget_color?: string;
     };
   }
 
-  interface UpdateInbox {
+  export interface UpdateInbox {
     accountId: number;
     id: number;
-    name: string;
-    enable_auto_assignment: boolean;
+    name?: string;
+    enableAutoAssignment: boolean;
     avatar?: string;
-    channel: {
-      website_url: string;
-      welcome_title: string;
-      welcome_tagline: string;
+    channel?: {
+      website_url?: string;
+      welcome_title?: string;
+      welcome_tagline?: string;
       agent_away_message?: string;
       widget_color?: string;
     };
   }
 
-  interface Inbox {
+  export interface Inbox {
     id: number;
     name: string;
     website_url: string;
@@ -1020,30 +1021,30 @@ declare module "chatwoot-client-node-js" {
     greeting_message: string;
   }
 
-  interface ListInboxAgents {
+  export interface ListInboxAgents {
     accountId: number;
     inboxId: number;
   }
 
-  interface AddInboxAgent {
+  export interface AddInboxAgent {
     accountId: number;
     inboxId: string;
-    user_ids: number[];
+    userIds: number[];
   }
 
-  interface UpdateInboxAgents {
+  export interface UpdateInboxAgents {
     accountId: number;
     inboxId: string;
-    user_ids: number[];
+    userIds: number[];
   }
 
-  interface RemoveInboxAgent {
+  export interface RemoveInboxAgent {
     accountId: number;
     inboxId: string;
-    user_ids: number[];
+    userIds: number[];
   }
 
-  interface InboxAgent {
+  export interface InboxAgent {
     id: number;
     uid: string;
     name: string;
@@ -1058,29 +1059,29 @@ declare module "chatwoot-client-node-js" {
     custom_attributes: Record<string, any>;
   }
 
-  interface ListIntegrations {
+  export interface ListIntegrations {
     accountId: number;
   }
 
-  interface CreateIntegrationHook {
+  export interface CreateIntegrationHook {
     accountId: number;
-    app_id: string;
-    inbox_id?: string;
-    settings: Record<string, any>;
+    appId?: string;
+    inboxId?: string;
+    settings?: Record<string, any>;
   }
 
-  interface UpdateIntegrationHook {
+  export interface UpdateIntegrationHook {
     accountId: number;
-    hook_id: number;
-    settings: Record<string, any>;
+    hookId: number;
+    settings?: Record<string, any>;
   }
 
-  interface DeleteIntegrationHook {
+  export interface DeleteIntegrationHook {
     accountId: number;
-    hook_id: number;
+    hookId: number;
   }
 
-  interface Integration {
+  export interface Integration {
     id: string;
     name: string;
     description: string;
@@ -1090,9 +1091,9 @@ declare module "chatwoot-client-node-js" {
     hooks: Record<string, any>[];
   }
 
-  interface IntegrationHook {
+  export interface IntegrationHook {
     id: string;
-    app_id: string;
+    appId: string;
     inbox_id?: string;
     account_id: string;
     status: boolean;
@@ -1100,25 +1101,20 @@ declare module "chatwoot-client-node-js" {
     settings: Record<string, any>;
   }
 
-  interface GetMessages {
+  export interface GetMessages {
     accountId: number;
     conversationId: number;
   }
 
-  interface CreateMessage {
+  export interface CreateMessage {
     accountId: number;
     conversationId: number;
     content: string;
-    message_type: "outgoing" | "incoming";
+    messageType?: "outgoing" | "incoming";
     private?: boolean;
-    content_type?:
-      | "input_email"
-      | "cards"
-      | "input_select"
-      | "form"
-      | "article";
-    content_attributes?: Record<string, any>;
-    template_params?: {
+    contentType?: "input_email" | "cards" | "input_select" | "form" | "article";
+    contentAttributes?: Record<string, any>;
+    templateParams?: {
       name?: string;
       category?: string;
       language?: string;
@@ -1126,13 +1122,13 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface DeleteMessage {
+  export interface DeleteMessage {
     accountId: number;
     conversationId: number;
     messageId: number;
   }
 
-  interface Message {
+  export interface Message {
     id: number;
     content: string;
     content_type: "text" | "input_select" | "cards" | "form";
@@ -1145,7 +1141,7 @@ declare module "chatwoot-client-node-js" {
     conversation_id: number;
   }
 
-  interface GetAccountReports {
+  export interface GetAccountReports {
     accountId: number;
     metric:
       | "conversations_count"
@@ -1160,7 +1156,7 @@ declare module "chatwoot-client-node-js" {
     until?: string;
   }
 
-  interface GetAccountReportsSummary {
+  export interface GetAccountReportsSummary {
     accountId: number;
     type: "account" | "agent" | "inbox" | "label" | "team";
     id?: string;
@@ -1168,23 +1164,23 @@ declare module "chatwoot-client-node-js" {
     until?: string;
   }
 
-  interface GetAccountConversationMetrics {
+  export interface GetAccountConversationMetrics {
     accountId: number;
     type: "account";
   }
 
-  interface GetAgentConversationMetrics {
+  export interface GetAgentConversationMetrics {
     accountId: number;
     type: "agent";
-    user_id: string;
+    userId?: string;
   }
 
-  interface Report {
+  export interface Report {
     value: string;
     timestamp: number;
   }
 
-  interface ReportSummary {
+  export interface ReportSummary {
     avg_first_response_time: string;
     avg_resolution_time: string;
     conversations_count: number;
@@ -1201,13 +1197,13 @@ declare module "chatwoot-client-node-js" {
     };
   }
 
-  interface ConversationMetrics {
+  export interface ConversationMetrics {
     open: number;
     unattended: number;
     unassigned: number;
   }
 
-  interface AgentConversationMetrics {
+  export interface AgentConversationMetrics {
     id: number;
     name: string;
     email: string;
@@ -1216,90 +1212,90 @@ declare module "chatwoot-client-node-js" {
     metric: Record<string, any>;
   }
 
-  interface ListTeams {
+  export interface ListTeams {
     accountId: number;
   }
 
-  interface CreateTeam {
+  export interface CreateTeam {
     accountId: number;
-    name: string;
-    description: string;
-    allow_auto_assign: boolean;
+    name?: string;
+    description?: string;
+    allowAutoAssign?: boolean;
   }
 
-  interface GetTeamDetails {
-    accountId: number;
-    teamId: number;
-  }
-
-  interface UpdateTeam {
-    accountId: number;
-    teamId: number;
-    name: string;
-    description: string;
-    allow_auto_assign: boolean;
-  }
-
-  interface DeleteTeam {
+  export interface GetTeamDetails {
     accountId: number;
     teamId: number;
   }
 
-  interface ListTeamAgents {
+  export interface UpdateTeam {
+    accountId: number;
+    teamId: number;
+    name?: string;
+    description?: string;
+    allowAutoAssign?: boolean;
+  }
+
+  export interface DeleteTeam {
     accountId: number;
     teamId: number;
   }
 
-  interface AddTeamAgent {
+  export interface ListTeamAgents {
     accountId: number;
     teamId: number;
-    user_ids: number[];
   }
 
-  interface UpdateTeamAgents {
+  export interface AddTeamAgent {
     accountId: number;
     teamId: number;
-    user_ids: number[];
+    userIds: number[];
   }
 
-  interface RemoveTeamAgent {
+  export interface UpdateTeamAgents {
     accountId: number;
     teamId: number;
-    user_ids: number[];
+    userIds: number[];
   }
 
-  interface Team {
+  export interface RemoveTeamAgent {
+    accountId: number;
+    teamId: number;
+    userIds: number[];
+  }
+
+  export interface Team {
     id: number;
     name: string;
     description: string;
-    allow_auto_assign: boolean;
-    account_id: number;
+    allowAutoAssign: boolean;
+    accountId: number;
     is_member: boolean;
   }
 
-  interface TeamAgent {
+  export interface TeamAgent {
     id: number;
     uid: string;
     name: string;
-    available_name: string;
-    display_name: string;
+    availableName: string;
+    displayName: string;
     email: string;
-    account_id: number;
+    accountId: number;
     role: "agent" | "administrator";
     confirmed: boolean;
-    availability_status: "available" | "busy" | "offline";
-    auto_offline: boolean;
-    custom_attributes: Record<string, any>;
+    availabilityStatus: "available" | "busy" | "offline";
+    autoOffline: boolean;
+    customAttributes: Record<string, any>;
   }
 
-  interface ListWebhooks {
+  export interface ListWebhooks {
     accountId: number;
   }
 
-  interface AddWebhook {
+  export interface AddWebhook {
     accountId: number;
-    url: string;
-    subscriptions: (
+    url?: string;
+    subscriptions?: (
       | "conversation_created"
       | "conversation_status_changed"
       | "conversation_updated"
@@ -1311,11 +1307,11 @@ declare module "chatwoot-client-node-js" {
     )[];
   }
 
-  interface UpdateWebhook {
+  export interface UpdateWebhook {
     accountId: number;
-    webhook_id: number;
-    url: string;
-    subscriptions: (
+    webhookId: number;
+    url?: string;
+    subscriptions?: (
       | "conversation_created"
       | "conversation_status_changed"
       | "conversation_updated"
@@ -1327,61 +1323,61 @@ declare module "chatwoot-client-node-js" {
     )[];
   }
 
-  interface DeleteWebhook {
+  export interface DeleteWebhook {
     accountId: number;
-    webhook_id: number;
+    webhookId: number;
   }
 
-  interface Webhook {
+  export interface Webhook {
     id: number;
     url: string;
     subscriptions: string[];
     account_id: number;
   }
 
-  interface ListAutomationRules {
+  export interface ListAutomationRules {
     accountId: number;
     page?: number;
   }
 
-  interface AddAutomationRule {
+  export interface AddAutomationRule {
     accountId: number;
-    name: string;
-    description: string;
-    event_name:
+    name?: string;
+    description?: string;
+    eventName?:
       | "conversation_created"
       | "conversation_updated"
       | "message_created";
-    active: boolean;
-    actions: Record<string, any>[];
-    conditions: Record<string, any>[];
+    active?: boolean;
+    actions?: Record<string, any>[];
+    conditions?: Record<string, any>[];
   }
 
-  interface GetAutomationRuleDetails {
+  export interface GetAutomationRuleDetails {
     accountId: number;
     id: number;
   }
 
-  interface UpdateAutomationRule {
+  export interface UpdateAutomationRule {
     accountId: number;
     id: number;
-    name: string;
-    description: string;
-    event_name:
+    name?: string;
+    description?: string;
+    eventName?:
       | "conversation_created"
       | "conversation_updated"
       | "message_created";
-    active: boolean;
-    actions: Record<string, any>[];
-    conditions: Record<string, any>[];
+    active?: boolean;
+    actions?: Record<string, any>[];
+    conditions?: Record<string, any>[];
   }
 
-  interface DeleteAutomationRule {
+  export interface DeleteAutomationRule {
     accountId: number;
     id: number;
   }
 
-  interface AutomationRule {
+  export interface AutomationRule {
     event_name:
       | "conversation_created"
       | "conversation_updated"
@@ -1393,43 +1389,43 @@ declare module "chatwoot-client-node-js" {
     conditions: Record<string, any>[];
     account_id: number;
   }
-  interface AddPortal {
+  export interface AddPortal {
     accountId: number;
-    archived: boolean;
-    color: string;
-    config: {
-      allowed_locales: string[];
-      default_locale: string;
+    archived?: boolean;
+    color?: string;
+    config?: {
+      allowed_locales?: string[];
+      default_locale?: string;
     };
-    custom_domain: string;
-    header_text: string;
-    homepage_link: string;
-    name: string;
-    slug: string;
-    page_title: string;
+    customDomain?: string;
+    headerText?: string;
+    homepageLink?: string;
+    name?: string;
+    slug?: string;
+    pageTitle?: string;
   }
 
-  interface ListPortals {
+  export interface ListPortals {
     accountId: number;
   }
 
-  interface UpdatePortal {
+  export interface UpdatePortal {
     accountId: number;
-    archived: boolean;
-    color: string;
-    config: {
-      allowed_locales: string[];
-      default_locale: string;
+    archived?: boolean;
+    color?: string;
+    config?: {
+      allowed_locales?: string[];
+      default_locale?: string;
     };
-    custom_domain: string;
-    header_text: string;
-    homepage_link: string;
-    name: string;
-    slug: string;
-    page_title: string;
+    custom_domain?: string;
+    header_text?: string;
+    homepage_link?: string;
+    name?: string;
+    slug?: string;
+    page_title?: string;
   }
 
-  interface Portal {
+  export interface Portal {
     id: number;
     archived: boolean;
     color: string;
@@ -1445,7 +1441,7 @@ declare module "chatwoot-client-node-js" {
     articles: Article[];
   }
 
-  interface Category {
+  export interface Category {
     id: number;
     description: string;
     locale: string;
@@ -1458,7 +1454,7 @@ declare module "chatwoot-client-node-js" {
     parent_category_id: number;
   }
 
-  interface Article {
+  export interface Article {
     id: number;
     content: string;
     meta: Record<string, any>;
@@ -1475,32 +1471,32 @@ declare module "chatwoot-client-node-js" {
     associated_article_id: number;
   }
 
-  interface AddCategory {
+  export interface AddCategory {
     accountId: number;
     portalId: number;
-    description: string;
-    locale: string;
-    name: string;
-    slug: string;
-    position: number;
-    associated_category_id?: number;
-    parent_category_id?: number;
+    description?: string;
+    locale?: string;
+    name?: string;
+    slug?: string;
+    position?: number;
+    associatedCategoryId?: number;
+    parentCategoryId?: number;
   }
 
-  interface AddArticle {
+  export interface AddArticle {
     accountId: number;
     portalId: number;
-    content: string;
-    meta: Record<string, any>;
-    position: number;
-    status: "draft" | "published" | "archived";
-    title: string;
-    slug: string;
-    views: number;
-    author_id: number;
-    category_id: number;
-    folder_id: number;
-    associated_article_id?: number;
+    content?: string;
+    meta?: Record<string, any>;
+    position?: number;
+    status?: "draft" | "published" | "archived";
+    title?: string;
+    slug?: string;
+    views?: number;
+    authorId?: number;
+    categoryId?: number;
+    folderId?: number;
+    associatedArticleId?: number;
   }
 
   class ChatwootClient {
@@ -1550,7 +1546,7 @@ declare module "chatwoot-client-node-js" {
     public createAgentBot({
       name,
       description,
-      outgoing_url,
+      outgoingUrl,
     }: CreateAgentBot): Promise<ApiResponse<AgentBot>>;
 
     public getAgentBotDetails({
@@ -1561,7 +1557,7 @@ declare module "chatwoot-client-node-js" {
       id,
       name,
       description,
-      outgoing_url,
+      outgoingUrl,
     }: UpdateAgentBot): Promise<ApiResponse<AgentBot>>;
 
     public deleteAgentBot({ id }: DeleteAgentBot): Promise<ApiResponse<void>>;
@@ -1599,7 +1595,7 @@ declare module "chatwoot-client-node-js" {
       accountId,
       name,
       description,
-      outgoing_url,
+      outgoingUrl,
     }: CreateAccountAgentBot): Promise<ApiResponse<AccountAgentBot>>;
 
     public getAccountAgentBotDetails({
@@ -1612,7 +1608,7 @@ declare module "chatwoot-client-node-js" {
       id,
       name,
       description,
-      outgoing_url,
+      outgoingUrl,
     }: UpdateAccountAgentBot): Promise<ApiResponse<AccountAgentBot>>;
 
     public deleteAccountAgentBot({
@@ -1651,7 +1647,7 @@ declare module "chatwoot-client-node-js" {
     public addCannedResponse({
       accountId,
       content,
-      short_code,
+      shortCode,
     }: AddCannedResponse): Promise<ApiResponse<CannedResponse>>;
 
     public deleteCannedResponse({
@@ -1803,12 +1799,12 @@ declare module "chatwoot-client-node-js" {
 
     public addCustomAttribute({
       accountId,
-      attribute_display_name,
-      attribute_display_type,
-      attribute_description,
-      attribute_key,
-      attribute_values,
-      attribute_model,
+      attributeDisplayName,
+      attributeDisplayType,
+      attributeDescription,
+      attributeKey,
+      attributeValues,
+      attributeModel,
     }: AddCustomAttribute): Promise<ApiResponse<CustomAttribute>>;
 
     public getCustomAttributeDetails({
@@ -1819,12 +1815,12 @@ declare module "chatwoot-client-node-js" {
     public updateCustomAttribute({
       accountId,
       id,
-      attribute_display_name,
-      attribute_display_type,
-      attribute_description,
-      attribute_key,
-      attribute_values,
-      attribute_model,
+      attributeDisplayName,
+      attributeDisplayType,
+      attributeDescription,
+      attributeKey,
+      attributeValues,
+      attributeModel,
     }: UpdateCustomAttribute): Promise<ApiResponse<CustomAttribute>>;
 
     public deleteCustomAttribute({
@@ -1839,6 +1835,7 @@ declare module "chatwoot-client-node-js" {
 
     public addCustomFilter({
       accountId,
+      filterType,
       name,
       type,
       query,
@@ -1882,7 +1879,7 @@ declare module "chatwoot-client-node-js" {
       accountId,
       id,
       name,
-      enable_auto_assignment,
+      enableAutoAssignment,
       avatar,
       channel,
     }: UpdateInbox): Promise<ApiResponse<Inbox>>;
@@ -1895,19 +1892,19 @@ declare module "chatwoot-client-node-js" {
     public addInboxAgent({
       accountId,
       inboxId,
-      user_ids,
+      userIds,
     }: AddInboxAgent): Promise<ApiResponse<InboxAgent[]>>;
 
     public updateInboxAgents({
       accountId,
       inboxId,
-      user_ids,
+      userIds,
     }: UpdateInboxAgents): Promise<ApiResponse<InboxAgent[]>>;
 
     public removeInboxAgent({
       accountId,
       inboxId,
-      user_ids,
+      userIds,
     }: RemoveInboxAgent): Promise<ApiResponse<void>>;
 
     public listIntegrations({
@@ -1916,20 +1913,20 @@ declare module "chatwoot-client-node-js" {
 
     public createIntegrationHook({
       accountId,
-      app_id,
-      inbox_id,
+      appId,
+      inboxId,
       settings,
     }: CreateIntegrationHook): Promise<ApiResponse<IntegrationHook>>;
 
     public updateIntegrationHook({
       accountId,
-      hook_id,
+      hookId,
       settings,
     }: UpdateIntegrationHook): Promise<ApiResponse<IntegrationHook>>;
 
     public deleteIntegrationHook({
       accountId,
-      hook_id,
+      hookId,
     }: DeleteIntegrationHook): Promise<ApiResponse<void>>;
 
     public getMessages({
@@ -1941,11 +1938,11 @@ declare module "chatwoot-client-node-js" {
       accountId,
       conversationId,
       content,
-      message_type,
+      messageType,
       private,
-      content_type,
-      content_attributes,
-      template_params,
+      contentType,
+      contentAttributes,
+      templateParams,
     }: CreateMessage): Promise<ApiResponse<Message>>;
 
     public deleteMessage({
@@ -1981,7 +1978,7 @@ declare module "chatwoot-client-node-js" {
     public getAgentConversationMetrics({
       accountId,
       type,
-      user_id,
+      userId,
     }: GetAgentConversationMetrics): Promise<
       ApiResponse<AgentConversationMetrics>
     >;
@@ -1992,7 +1989,7 @@ declare module "chatwoot-client-node-js" {
       accountId,
       name,
       description,
-      allow_auto_assign,
+      allowAutoAssign,
     }: CreateTeam): Promise<ApiResponse<Team>>;
 
     public getTeamDetails({
@@ -2005,7 +2002,7 @@ declare module "chatwoot-client-node-js" {
       teamId,
       name,
       description,
-      allow_auto_assign,
+      allowAutoAssign,
     }: UpdateTeam): Promise<ApiResponse<Team>>;
 
     public deleteTeam({
@@ -2021,19 +2018,19 @@ declare module "chatwoot-client-node-js" {
     public addTeamAgent({
       accountId,
       teamId,
-      user_ids,
+      userIds,
     }: AddTeamAgent): Promise<ApiResponse<TeamAgent[]>>;
 
     public updateTeamAgents({
       accountId,
       teamId,
-      user_ids,
+      userIds,
     }: UpdateTeamAgents): Promise<ApiResponse<TeamAgent[]>>;
 
     public removeTeamAgent({
       accountId,
       teamId,
-      user_ids,
+      userIds,
     }: RemoveTeamAgent): Promise<ApiResponse<void>>;
 
     public listWebhooks({
@@ -2048,14 +2045,14 @@ declare module "chatwoot-client-node-js" {
 
     public updateWebhook({
       accountId,
-      webhook_id,
+      webhookId,
       url,
       subscriptions,
     }: UpdateWebhook): Promise<ApiResponse<Webhook>>;
 
     public deleteWebhook({
       accountId,
-      webhook_id,
+      webhookId,
     }: DeleteWebhook): Promise<ApiResponse<void>>;
 
     public listAutomationRules({
@@ -2067,7 +2064,7 @@ declare module "chatwoot-client-node-js" {
       accountId,
       name,
       description,
-      event_name,
+      eventName,
       active,
       actions,
       conditions,
@@ -2083,7 +2080,7 @@ declare module "chatwoot-client-node-js" {
       id,
       name,
       description,
-      event_name,
+      eventName,
       active,
       actions,
       conditions,
@@ -2099,12 +2096,12 @@ declare module "chatwoot-client-node-js" {
       archived,
       color,
       config,
-      custom_domain,
-      header_text,
-      homepage_link,
+      customDomain,
+      headerText,
+      homepageLink,
       name,
       slug,
-      page_title,
+      pageTitle,
     }: AddPortal): Promise<ApiResponse<Portal>>;
 
     public listPortals({
@@ -2116,12 +2113,12 @@ declare module "chatwoot-client-node-js" {
       archived,
       color,
       config,
-      custom_domain,
-      header_text,
-      homepage_link,
+      customDomain,
+      headerText,
+      homepageLink,
       name,
       slug,
-      page_title,
+      pageTitle,
     }: UpdatePortal): Promise<ApiResponse<Portal>>;
 
     public addCategory({
@@ -2132,8 +2129,8 @@ declare module "chatwoot-client-node-js" {
       name,
       slug,
       position,
-      associated_category_id,
-      parent_category_id,
+      associatedCategoryId,
+      parentCategoryId,
     }: AddCategory): Promise<ApiResponse<Category>>;
 
     public addArticle({
@@ -2146,10 +2143,10 @@ declare module "chatwoot-client-node-js" {
       title,
       slug,
       views,
-      author_id,
-      category_id,
-      folder_id,
-      associated_article_id,
+      authorId,
+      categoryId,
+      folderId,
+      associatedArticleId,
     }: AddArticle): Promise<ApiResponse<Article>>;
   }
 

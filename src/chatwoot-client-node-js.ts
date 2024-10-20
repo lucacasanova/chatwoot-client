@@ -269,9 +269,6 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
-    if (!name) {
-      return { success: false, error: "name is required" };
-    }
     return this.requestWithRetry(() =>
       this.axiosInstance.patch(
         `/platform/api/v${this.version}/accounts/${accountId}`,
@@ -407,7 +404,7 @@ class ChatwootClient {
   public async createAgentBot({
     name,
     description,
-    outgoing_url,
+    outgoingUrl,
   }: CreateAgentBot): Promise<ApiResponse<AgentBot>> {
     if (!this.config.platformToken) {
       return { success: false, error: "platformToken is required" };
@@ -418,7 +415,7 @@ class ChatwootClient {
         {
           name,
           description,
-          outgoing_url,
+          outgoing_url: outgoingUrl,
         },
         {
           headers: {
@@ -434,6 +431,9 @@ class ChatwootClient {
   }: GetAgentBotDetails): Promise<ApiResponse<AgentBot>> {
     if (!this.config.platformToken) {
       return { success: false, error: "platformToken is required" };
+    }
+    if (!id) {
+      return { success: false, error: "id is required" };
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
@@ -451,10 +451,13 @@ class ChatwootClient {
     id,
     name,
     description,
-    outgoing_url,
+    outgoingUrl,
   }: UpdateAgentBot): Promise<ApiResponse<AgentBot>> {
     if (!this.config.platformToken) {
       return { success: false, error: "platformToken is required" };
+    }
+    if (!id) {
+      return { success: false, error: "id is required" };
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.patch(
@@ -462,7 +465,7 @@ class ChatwootClient {
         {
           name,
           description,
-          outgoing_url,
+          outgoing_url: outgoingUrl,
         },
         {
           headers: {
@@ -478,6 +481,9 @@ class ChatwootClient {
   }: DeleteAgentBot): Promise<ApiResponse<void>> {
     if (!this.config.platformToken) {
       return { success: false, error: "platformToken is required" };
+    }
+    if (!id) {
+      return { success: false, error: "id is required" };
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
@@ -527,6 +533,9 @@ class ChatwootClient {
   }: GetUserDetails): Promise<ApiResponse<UserDetails>> {
     if (!this.config.platformToken) {
       return { success: false, error: "platformToken is required" };
+    }
+    if (!id) {
+      return { success: false, error: "id is required" };
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(`/platform/api/v${this.version}/users/${id}`, {
@@ -590,6 +599,9 @@ class ChatwootClient {
     if (!this.config.platformToken) {
       return { success: false, error: "platformToken is required" };
     }
+    if (!id) {
+      return { success: false, error: "id is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
         `/platform/api/v${this.version}/users/${id}/login`,
@@ -631,7 +643,7 @@ class ChatwootClient {
     accountId,
     name,
     description,
-    outgoing_url,
+    outgoingUrl,
   }: CreateAccountAgentBot): Promise<ApiResponse<AccountAgentBot>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -645,7 +657,7 @@ class ChatwootClient {
         {
           name,
           description,
-          outgoing_url,
+          outgoing_url: outgoingUrl,
         },
         {
           headers: {
@@ -686,7 +698,7 @@ class ChatwootClient {
     id,
     name,
     description,
-    outgoing_url,
+    outgoingUrl,
   }: UpdateAccountAgentBot): Promise<ApiResponse<AccountAgentBot>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -703,7 +715,7 @@ class ChatwootClient {
         {
           name,
           description,
-          outgoing_url,
+          outgoing_url: outgoingUrl,
         },
         {
           headers: {
@@ -852,6 +864,9 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
+    if (!id) {
+      return { success: false, error: "id is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
         `/api/v${this.version}/accounts/${accountId}/agents/${id}`,
@@ -892,7 +907,7 @@ class ChatwootClient {
   public async addCannedResponse({
     accountId,
     content,
-    short_code,
+    shortCode,
   }: AddCannedResponse): Promise<ApiResponse<CannedResponse>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -905,7 +920,7 @@ class ChatwootClient {
         `/api/v${this.version}/accounts/${accountId}/canned_responses`,
         {
           content,
-          short_code,
+          short_code: shortCode,
         },
         {
           headers: {
@@ -1166,17 +1181,12 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
-    if (!payload || payload.length === 0) {
-      return { success: false, error: "filter payload is required" };
-    }
     return this.requestWithRetry(() =>
       this.axiosInstance.post(
         `/api/v${this.version}/accounts/${accountId}/contacts/filter`,
+        { payload },
         {
-          page,
-          payload,
-        },
-        {
+          params: { page },
           headers: {
             api_access_token: this.config.userToken,
           },
@@ -1264,9 +1274,6 @@ class ChatwootClient {
     }
     if (!conversationId) {
       return { success: false, error: "conversationId is required" };
-    }
-    if (!labels || labels.length === 0) {
-      return { success: false, error: "labels are required" };
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.post(
@@ -1417,17 +1424,14 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
-    if (!payload || payload.length === 0) {
-      return { success: false, error: "filter payload is required" };
-    }
     return this.requestWithRetry(() =>
       this.axiosInstance.post(
         `/api/v${this.version}/accounts/${accountId}/conversations/filter`,
         {
-          page,
           payload,
         },
         {
+          params: { page },
           headers: {
             api_access_token: this.config.userToken,
           },
@@ -1569,12 +1573,12 @@ class ChatwootClient {
 
   public async addCustomAttribute({
     accountId,
-    attribute_display_name,
-    attribute_display_type,
-    attribute_description,
-    attribute_key,
-    attribute_values,
-    attribute_model,
+    attributeDisplayName,
+    attributeDisplayType,
+    attributeDescription,
+    attributeKey,
+    attributeValues,
+    attributeModel,
   }: AddCustomAttribute): Promise<ApiResponse<CustomAttribute>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -1586,12 +1590,12 @@ class ChatwootClient {
       this.axiosInstance.post(
         `/api/v${this.version}/accounts/${accountId}/custom_attribute_definitions`,
         {
-          attribute_display_name,
-          attribute_display_type,
-          attribute_description,
-          attribute_key,
-          attribute_values,
-          attribute_model,
+          attribute_display_name: attributeDisplayName,
+          attribute_display_type: attributeDisplayType,
+          attribute_description: attributeDescription,
+          attribute_key: attributeKey,
+          attribute_values: attributeValues,
+          attribute_model: attributeModel,
         },
         {
           headers: {
@@ -1630,12 +1634,12 @@ class ChatwootClient {
   public async updateCustomAttribute({
     accountId,
     id,
-    attribute_display_name,
-    attribute_display_type,
-    attribute_description,
-    attribute_key,
-    attribute_values,
-    attribute_model,
+    attributeDisplayName,
+    attributeDisplayType,
+    attributeDescription,
+    attributeKey,
+    attributeValues,
+    attributeModel,
   }: UpdateCustomAttribute): Promise<ApiResponse<CustomAttribute>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -1650,12 +1654,12 @@ class ChatwootClient {
       this.axiosInstance.patch(
         `/api/v${this.version}/accounts/${accountId}/custom_attribute_definitions/${id}`,
         {
-          attribute_display_name,
-          attribute_display_type,
-          attribute_description,
-          attribute_key,
-          attribute_values,
-          attribute_model,
+          attribute_display_name: attributeDisplayName,
+          attribute_display_type: attributeDisplayType,
+          attribute_description: attributeDescription,
+          attribute_key: attributeKey,
+          attribute_values: attributeValues,
+          attribute_model: attributeModel,
         },
         {
           headers: {
@@ -1705,9 +1709,6 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
-    if (!filterType) {
-      return { success: false, error: "filterType is required" };
-    }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
         `/api/v${this.version}/accounts/${accountId}/custom_filters`,
@@ -1723,6 +1724,7 @@ class ChatwootClient {
 
   public async addCustomFilter({
     accountId,
+    filterType,
     name,
     type,
     query,
@@ -1742,6 +1744,7 @@ class ChatwootClient {
           query,
         },
         {
+          params: { filter_type: filterType },
           headers: {
             api_access_token: this.config.userToken,
           },
@@ -1916,7 +1919,7 @@ class ChatwootClient {
     accountId,
     id,
     name,
-    enable_auto_assignment,
+    enableAutoAssignment,
     avatar,
     channel,
   }: UpdateInbox): Promise<ApiResponse<Inbox>> {
@@ -1929,12 +1932,15 @@ class ChatwootClient {
     if (!id) {
       return { success: false, error: "id is required" };
     }
+    if (!enableAutoAssignment) {
+      return { success: false, error: "enableAutoAssignment is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.patch(
         `/api/v${this.version}/accounts/${accountId}/inboxes/${id}`,
         {
           name,
-          enable_auto_assignment,
+          enable_auto_assignment: enableAutoAssignment,
           avatar,
           channel,
         },
@@ -1975,7 +1981,7 @@ class ChatwootClient {
   public async addInboxAgent({
     accountId,
     inboxId,
-    user_ids,
+    userIds,
   }: AddInboxAgent): Promise<ApiResponse<InboxAgent[]>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -1983,12 +1989,18 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
+    if (!inboxId) {
+      return { success: false, error: "inboxId is required" };
+    }
+    if (!userIds) {
+      return { success: false, error: "userIds is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.post(
         `/api/v${this.version}/accounts/${accountId}/inbox_members`,
         {
           inbox_id: inboxId,
-          user_ids,
+          user_ids: userIds,
         },
         {
           headers: {
@@ -2002,7 +2014,7 @@ class ChatwootClient {
   public async updateInboxAgents({
     accountId,
     inboxId,
-    user_ids,
+    userIds,
   }: UpdateInboxAgents): Promise<ApiResponse<InboxAgent[]>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2010,12 +2022,18 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
+    if (!inboxId) {
+      return { success: false, error: "inboxId is required" };
+    }
+    if (!userIds) {
+      return { success: false, error: "userIds is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.patch(
         `/api/v${this.version}/accounts/${accountId}/inbox_members`,
         {
           inbox_id: inboxId,
-          user_ids,
+          user_ids: userIds,
         },
         {
           headers: {
@@ -2029,7 +2047,7 @@ class ChatwootClient {
   public async removeInboxAgent({
     accountId,
     inboxId,
-    user_ids,
+    userIds,
   }: RemoveInboxAgent): Promise<ApiResponse<void>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2037,13 +2055,19 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
+    if (!inboxId) {
+      return { success: false, error: "inboxId is required" };
+    }
+    if (!userIds) {
+      return { success: false, error: "userIds is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
         `/api/v${this.version}/accounts/${accountId}/inbox_members`,
         {
           data: {
             inbox_id: inboxId,
-            user_ids,
+            user_ids: userIds,
           },
           headers: {
             api_access_token: this.config.userToken,
@@ -2080,8 +2104,8 @@ class ChatwootClient {
 
   public async createIntegrationHook({
     accountId,
-    app_id,
-    inbox_id,
+    appId,
+    inboxId,
     settings,
   }: CreateIntegrationHook): Promise<ApiResponse<IntegrationHook>> {
     if (!this.config.userToken) {
@@ -2094,8 +2118,8 @@ class ChatwootClient {
       this.axiosInstance.post(
         `/api/v${this.version}/accounts/${accountId}/integrations/hooks`,
         {
-          app_id,
-          inbox_id,
+          app_id: appId,
+          inbox_id: inboxId,
           settings,
         },
         {
@@ -2109,7 +2133,7 @@ class ChatwootClient {
 
   public async updateIntegrationHook({
     accountId,
-    hook_id,
+    hookId,
     settings,
   }: UpdateIntegrationHook): Promise<ApiResponse<IntegrationHook>> {
     if (!this.config.userToken) {
@@ -2118,12 +2142,12 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
-    if (!hook_id) {
-      return { success: false, error: "hook_id is required" };
+    if (!hookId) {
+      return { success: false, error: "hookId is required" };
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.patch(
-        `/api/v${this.version}/accounts/${accountId}/integrations/hooks/${hook_id}`,
+        `/api/v${this.version}/accounts/${accountId}/integrations/hooks/${hookId}`,
         {
           settings,
         },
@@ -2138,7 +2162,7 @@ class ChatwootClient {
 
   public async deleteIntegrationHook({
     accountId,
-    hook_id,
+    hookId,
   }: DeleteIntegrationHook): Promise<ApiResponse<void>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2146,12 +2170,12 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
-    if (!hook_id) {
-      return { success: false, error: "hook_id is required" };
+    if (!hookId) {
+      return { success: false, error: "hookId is required" };
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/integrations/hooks/${hook_id}`,
+        `/api/v${this.version}/accounts/${accountId}/integrations/hooks/${hookId}`,
         {
           headers: {
             api_access_token: this.config.userToken,
@@ -2194,11 +2218,11 @@ class ChatwootClient {
     accountId,
     conversationId,
     content,
-    message_type,
+    messageType,
     private: isPrivate,
-    content_type,
-    content_attributes,
-    template_params,
+    contentType,
+    contentAttributes,
+    templateParams,
   }: CreateMessage): Promise<ApiResponse<Message>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2212,19 +2236,16 @@ class ChatwootClient {
     if (!content) {
       return { success: false, error: "content is required" };
     }
-    if (!message_type) {
-      return { success: false, error: "message_type is required" };
-    }
     return this.requestWithRetry(() =>
       this.axiosInstance.post(
         `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/messages`,
         {
           content,
-          message_type,
+          message_type: messageType,
           private: isPrivate,
-          content_type,
-          content_attributes,
-          template_params,
+          content_type: contentType,
+          content_attributes: contentAttributes,
+          template_params: templateParams,
         },
         {
           headers: {
@@ -2353,7 +2374,7 @@ class ChatwootClient {
   public async getAgentConversationMetrics({
     accountId,
     type,
-    user_id,
+    userId,
   }: GetAgentConversationMetrics): Promise<
     ApiResponse<AgentConversationMetrics[]>
   > {
@@ -2366,14 +2387,11 @@ class ChatwootClient {
     if (!type) {
       return { success: false, error: "type is required" };
     }
-    if (!user_id) {
-      return { success: false, error: "user_id is required" };
-    }
     return this.requestWithRetry(() =>
       this.axiosInstance.get(
         `/api/v2/accounts/${accountId}/reports/conversations`,
         {
-          params: { type, user_id },
+          params: { type, user_id: userId },
           headers: {
             api_access_token: this.config.userToken,
           },
@@ -2411,7 +2429,7 @@ class ChatwootClient {
     accountId,
     name,
     description,
-    allow_auto_assign,
+    allowAutoAssign,
   }: CreateTeam): Promise<ApiResponse<Team>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2425,7 +2443,7 @@ class ChatwootClient {
         {
           name,
           description,
-          allow_auto_assign,
+          allow_auto_assign: allowAutoAssign,
         },
         {
           headers: {
@@ -2466,7 +2484,7 @@ class ChatwootClient {
     teamId,
     name,
     description,
-    allow_auto_assign,
+    allowAutoAssign,
   }: UpdateTeam): Promise<ApiResponse<Team>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2483,7 +2501,7 @@ class ChatwootClient {
         {
           name,
           description,
-          allow_auto_assign,
+          allow_auto_assign: allowAutoAssign,
         },
         {
           headers: {
@@ -2547,7 +2565,7 @@ class ChatwootClient {
   public async addTeamAgent({
     accountId,
     teamId,
-    user_ids,
+    userIds,
   }: AddTeamAgent): Promise<ApiResponse<TeamAgent[]>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2555,11 +2573,17 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
+    if (!teamId) {
+      return { success: false, error: "teamId is required" };
+    }
+    if (!userIds) {
+      return { success: false, error: "userIds is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.post(
         `/api/v${this.version}/accounts/${accountId}/teams/${teamId}/team_members`,
         {
-          user_ids,
+          user_ids: userIds,
         },
         {
           headers: {
@@ -2573,7 +2597,7 @@ class ChatwootClient {
   public async updateTeamAgents({
     accountId,
     teamId,
-    user_ids,
+    userIds,
   }: UpdateTeamAgents): Promise<ApiResponse<TeamAgent[]>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2581,11 +2605,17 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
+    if (!teamId) {
+      return { success: false, error: "teamId is required" };
+    }
+    if (!userIds) {
+      return { success: false, error: "userIds is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.patch(
         `/api/v${this.version}/accounts/${accountId}/teams/${teamId}/team_members`,
         {
-          user_ids,
+          user_ids: userIds,
         },
         {
           headers: {
@@ -2599,7 +2629,7 @@ class ChatwootClient {
   public async removeTeamAgent({
     accountId,
     teamId,
-    user_ids,
+    userIds,
   }: RemoveTeamAgent): Promise<ApiResponse<void>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2607,12 +2637,18 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
+    if (!teamId) {
+      return { success: false, error: "teamId is required" };
+    }
+    if (!userIds) {
+      return { success: false, error: "userIds is required" };
+    }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
         `/api/v${this.version}/accounts/${accountId}/teams/${teamId}/team_members`,
         {
           data: {
-            user_ids,
+            user_ids: userIds,
           },
           headers: {
             api_access_token: this.config.userToken,
@@ -2676,7 +2712,7 @@ class ChatwootClient {
 
   public async updateWebhook({
     accountId,
-    webhook_id,
+    webhookId,
     url,
     subscriptions,
   }: UpdateWebhook): Promise<ApiResponse<Webhook>> {
@@ -2686,12 +2722,12 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
-    if (!webhook_id) {
-      return { success: false, error: "webhook_id is required" };
+    if (!webhookId) {
+      return { success: false, error: "webhookId is required" };
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.patch(
-        `/api/v${this.version}/accounts/${accountId}/webhooks/${webhook_id}`,
+        `/api/v${this.version}/accounts/${accountId}/webhooks/${webhookId}`,
         {
           url,
           subscriptions,
@@ -2707,7 +2743,7 @@ class ChatwootClient {
 
   public async deleteWebhook({
     accountId,
-    webhook_id,
+    webhookId,
   }: DeleteWebhook): Promise<ApiResponse<void>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2715,12 +2751,12 @@ class ChatwootClient {
     if (!accountId) {
       return { success: false, error: "accountId is required" };
     }
-    if (!webhook_id) {
-      return { success: false, error: "webhook_id is required" };
+    if (!webhookId) {
+      return { success: false, error: "webhookId is required" };
     }
     return this.requestWithRetry(() =>
       this.axiosInstance.delete(
-        `/api/v${this.version}/accounts/${accountId}/webhooks/${webhook_id}`,
+        `/api/v${this.version}/accounts/${accountId}/webhooks/${webhookId}`,
         {
           headers: {
             api_access_token: this.config.userToken,
@@ -2761,7 +2797,7 @@ class ChatwootClient {
     accountId,
     name,
     description,
-    event_name,
+    eventName,
     active,
     actions,
     conditions,
@@ -2778,7 +2814,7 @@ class ChatwootClient {
         {
           name,
           description,
-          event_name,
+          event_name: eventName,
           active,
           actions,
           conditions,
@@ -2822,7 +2858,7 @@ class ChatwootClient {
     id,
     name,
     description,
-    event_name,
+    eventName,
     active,
     actions,
     conditions,
@@ -2842,7 +2878,7 @@ class ChatwootClient {
         {
           name,
           description,
-          event_name,
+          event_name: eventName,
           active,
           actions,
           conditions,
@@ -2890,12 +2926,12 @@ class ChatwootClient {
     archived,
     color,
     config,
-    custom_domain,
-    header_text,
-    homepage_link,
+    customDomain,
+    headerText,
+    homepageLink,
     name,
     slug,
-    page_title,
+    pageTitle,
   }: AddPortal): Promise<ApiResponse<Portal>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2910,12 +2946,13 @@ class ChatwootClient {
           archived,
           color,
           config,
-          custom_domain,
-          header_text,
-          homepage_link,
+          custom_domain: customDomain,
+          header_text: headerText,
+          homepage_link: homepageLink,
           name,
           slug,
-          page_title,
+          page_title: pageTitle,
+          account_id: accountId,
         },
         {
           headers: {
@@ -2952,12 +2989,12 @@ class ChatwootClient {
     archived,
     color,
     config,
-    custom_domain,
-    header_text,
-    homepage_link,
+    customDomain,
+    headerText,
+    homepageLink,
     name,
     slug,
-    page_title,
+    pageTitle,
   }: UpdatePortal): Promise<ApiResponse<Portal>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -2972,12 +3009,13 @@ class ChatwootClient {
           archived,
           color,
           config,
-          custom_domain,
-          header_text,
-          homepage_link,
+          custom_domain: customDomain,
+          header_text: headerText,
+          homepage_link: homepageLink,
           name,
           slug,
-          page_title,
+          page_title: pageTitle,
+          account_id: accountId,
         },
         {
           headers: {
@@ -2996,8 +3034,8 @@ class ChatwootClient {
     name,
     slug,
     position,
-    associated_category_id,
-    parent_category_id,
+    associatedCategoryId,
+    parentCategoryId,
   }: AddCategory): Promise<ApiResponse<Category>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -3017,8 +3055,8 @@ class ChatwootClient {
           name,
           slug,
           position,
-          associated_category_id,
-          parent_category_id,
+          associated_category_id: associatedCategoryId,
+          parent_category_id: parentCategoryId,
         },
         {
           headers: {
@@ -3039,10 +3077,10 @@ class ChatwootClient {
     title,
     slug,
     views,
-    author_id,
-    category_id,
-    folder_id,
-    associated_article_id,
+    authorId,
+    categoryId,
+    folderId,
+    associatedArticleId,
   }: AddArticle): Promise<ApiResponse<Article>> {
     if (!this.config.userToken) {
       return { success: false, error: "userToken is required" };
@@ -3064,10 +3102,10 @@ class ChatwootClient {
           title,
           slug,
           views,
-          author_id,
-          category_id,
-          folder_id,
-          associated_article_id,
+          author_id: authorId,
+          category_id: categoryId,
+          folder_id: folderId,
+          associated_article_id: associatedArticleId,
         },
         {
           headers: {

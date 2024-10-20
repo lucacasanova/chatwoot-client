@@ -172,9 +172,6 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
-                if (!name) {
-                    return [2 /*return*/, { success: false, error: "name is required" }];
-                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.patch("/platform/api/v".concat(_this.version, "/accounts/").concat(accountId), { name: name }, {
                             headers: {
@@ -305,7 +302,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.createAgentBot = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var name = _b.name, description = _b.description, outgoing_url = _b.outgoing_url;
+            var name = _b.name, description = _b.description, outgoingUrl = _b.outgoingUrl;
             return __generator(this, function (_c) {
                 if (!this.config.platformToken) {
                     return [2 /*return*/, { success: false, error: "platformToken is required" }];
@@ -314,7 +311,7 @@ var ChatwootClient = /** @class */ (function () {
                         return _this.axiosInstance.post("/platform/api/v".concat(_this.version, "/agent_bots"), {
                             name: name,
                             description: description,
-                            outgoing_url: outgoing_url,
+                            outgoing_url: outgoingUrl,
                         }, {
                             headers: {
                                 api_access_token: _this.config.platformToken,
@@ -332,6 +329,9 @@ var ChatwootClient = /** @class */ (function () {
                 if (!this.config.platformToken) {
                     return [2 /*return*/, { success: false, error: "platformToken is required" }];
                 }
+                if (!id) {
+                    return [2 /*return*/, { success: false, error: "id is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.get("/platform/api/v".concat(_this.version, "/agent_bots/").concat(id), {
                             headers: {
@@ -345,16 +345,19 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateAgentBot = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var id = _b.id, name = _b.name, description = _b.description, outgoing_url = _b.outgoing_url;
+            var id = _b.id, name = _b.name, description = _b.description, outgoingUrl = _b.outgoingUrl;
             return __generator(this, function (_c) {
                 if (!this.config.platformToken) {
                     return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
+                if (!id) {
+                    return [2 /*return*/, { success: false, error: "id is required" }];
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.patch("/platform/api/v".concat(_this.version, "/agent_bots/").concat(id), {
                             name: name,
                             description: description,
-                            outgoing_url: outgoing_url,
+                            outgoing_url: outgoingUrl,
                         }, {
                             headers: {
                                 api_access_token: _this.config.platformToken,
@@ -371,6 +374,9 @@ var ChatwootClient = /** @class */ (function () {
             return __generator(this, function (_c) {
                 if (!this.config.platformToken) {
                     return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
+                if (!id) {
+                    return [2 /*return*/, { success: false, error: "id is required" }];
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.delete("/platform/api/v".concat(_this.version, "/agent_bots/").concat(id), {
@@ -415,6 +421,9 @@ var ChatwootClient = /** @class */ (function () {
             return __generator(this, function (_c) {
                 if (!this.config.platformToken) {
                     return [2 /*return*/, { success: false, error: "platformToken is required" }];
+                }
+                if (!id) {
+                    return [2 /*return*/, { success: false, error: "id is required" }];
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.get("/platform/api/v".concat(_this.version, "/users/").concat(id), {
@@ -481,6 +490,9 @@ var ChatwootClient = /** @class */ (function () {
                 if (!this.config.platformToken) {
                     return [2 /*return*/, { success: false, error: "platformToken is required" }];
                 }
+                if (!id) {
+                    return [2 /*return*/, { success: false, error: "id is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.get("/platform/api/v".concat(_this.version, "/users/").concat(id, "/login"), {
                             headers: {
@@ -518,7 +530,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.createAccountAgentBot = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, name = _b.name, description = _b.description, outgoing_url = _b.outgoing_url;
+            var accountId = _b.accountId, name = _b.name, description = _b.description, outgoingUrl = _b.outgoingUrl;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -530,7 +542,7 @@ var ChatwootClient = /** @class */ (function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/agent_bots"), {
                             name: name,
                             description: description,
-                            outgoing_url: outgoing_url,
+                            outgoing_url: outgoingUrl,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -567,7 +579,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateAccountAgentBot = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, id = _b.id, name = _b.name, description = _b.description, outgoing_url = _b.outgoing_url;
+            var accountId = _b.accountId, id = _b.id, name = _b.name, description = _b.description, outgoingUrl = _b.outgoingUrl;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -582,7 +594,7 @@ var ChatwootClient = /** @class */ (function () {
                         return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/agent_bots/").concat(id), {
                             name: name,
                             description: description,
-                            outgoing_url: outgoing_url,
+                            outgoing_url: outgoingUrl,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -718,6 +730,9 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
+                if (!id) {
+                    return [2 /*return*/, { success: false, error: "id is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.delete("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/agents/").concat(id), {
                             headers: {
@@ -755,7 +770,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.addCannedResponse = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, content = _b.content, short_code = _b.short_code;
+            var accountId = _b.accountId, content = _b.content, shortCode = _b.shortCode;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -766,7 +781,7 @@ var ChatwootClient = /** @class */ (function () {
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/canned_responses"), {
                             content: content,
-                            short_code: short_code,
+                            short_code: shortCode,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -998,14 +1013,9 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
-                if (!payload || payload.length === 0) {
-                    return [2 /*return*/, { success: false, error: "filter payload is required" }];
-                }
                 return [2 /*return*/, this.requestWithRetry(function () {
-                        return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/contacts/filter"), {
-                            page: page,
-                            payload: payload,
-                        }, {
+                        return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/contacts/filter"), { payload: payload }, {
+                            params: { page: page },
                             headers: {
                                 api_access_token: _this.config.userToken,
                             },
@@ -1087,9 +1097,6 @@ var ChatwootClient = /** @class */ (function () {
                 }
                 if (!conversationId) {
                     return [2 /*return*/, { success: false, error: "conversationId is required" }];
-                }
-                if (!labels || labels.length === 0) {
-                    return [2 /*return*/, { success: false, error: "labels are required" }];
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/conversations/").concat(conversationId, "/labels"), {
@@ -1212,14 +1219,11 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
-                if (!payload || payload.length === 0) {
-                    return [2 /*return*/, { success: false, error: "filter payload is required" }];
-                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/conversations/filter"), {
-                            page: page,
                             payload: payload,
                         }, {
+                            params: { page: page },
                             headers: {
                                 api_access_token: _this.config.userToken,
                             },
@@ -1350,7 +1354,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.addCustomAttribute = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, attribute_display_name = _b.attribute_display_name, attribute_display_type = _b.attribute_display_type, attribute_description = _b.attribute_description, attribute_key = _b.attribute_key, attribute_values = _b.attribute_values, attribute_model = _b.attribute_model;
+            var accountId = _b.accountId, attributeDisplayName = _b.attributeDisplayName, attributeDisplayType = _b.attributeDisplayType, attributeDescription = _b.attributeDescription, attributeKey = _b.attributeKey, attributeValues = _b.attributeValues, attributeModel = _b.attributeModel;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1360,12 +1364,12 @@ var ChatwootClient = /** @class */ (function () {
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/custom_attribute_definitions"), {
-                            attribute_display_name: attribute_display_name,
-                            attribute_display_type: attribute_display_type,
-                            attribute_description: attribute_description,
-                            attribute_key: attribute_key,
-                            attribute_values: attribute_values,
-                            attribute_model: attribute_model,
+                            attribute_display_name: attributeDisplayName,
+                            attribute_display_type: attributeDisplayType,
+                            attribute_description: attributeDescription,
+                            attribute_key: attributeKey,
+                            attribute_values: attributeValues,
+                            attribute_model: attributeModel,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -1402,7 +1406,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateCustomAttribute = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, id = _b.id, attribute_display_name = _b.attribute_display_name, attribute_display_type = _b.attribute_display_type, attribute_description = _b.attribute_description, attribute_key = _b.attribute_key, attribute_values = _b.attribute_values, attribute_model = _b.attribute_model;
+            var accountId = _b.accountId, id = _b.id, attributeDisplayName = _b.attributeDisplayName, attributeDisplayType = _b.attributeDisplayType, attributeDescription = _b.attributeDescription, attributeKey = _b.attributeKey, attributeValues = _b.attributeValues, attributeModel = _b.attributeModel;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1415,12 +1419,12 @@ var ChatwootClient = /** @class */ (function () {
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/custom_attribute_definitions/").concat(id), {
-                            attribute_display_name: attribute_display_name,
-                            attribute_display_type: attribute_display_type,
-                            attribute_description: attribute_description,
-                            attribute_key: attribute_key,
-                            attribute_values: attribute_values,
-                            attribute_model: attribute_model,
+                            attribute_display_name: attributeDisplayName,
+                            attribute_display_type: attributeDisplayType,
+                            attribute_description: attributeDescription,
+                            attribute_key: attributeKey,
+                            attribute_values: attributeValues,
+                            attribute_model: attributeModel,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -1468,9 +1472,6 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
-                if (!filterType) {
-                    return [2 /*return*/, { success: false, error: "filterType is required" }];
-                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.get("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/custom_filters"), {
                             params: { filter_type: filterType },
@@ -1485,7 +1486,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.addCustomFilter = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, name = _b.name, type = _b.type, query = _b.query;
+            var accountId = _b.accountId, filterType = _b.filterType, name = _b.name, type = _b.type, query = _b.query;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1499,6 +1500,7 @@ var ChatwootClient = /** @class */ (function () {
                             type: type,
                             query: query,
                         }, {
+                            params: { filter_type: filterType },
                             headers: {
                                 api_access_token: _this.config.userToken,
                             },
@@ -1659,7 +1661,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateInbox = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, id = _b.id, name = _b.name, enable_auto_assignment = _b.enable_auto_assignment, avatar = _b.avatar, channel = _b.channel;
+            var accountId = _b.accountId, id = _b.id, name = _b.name, enableAutoAssignment = _b.enableAutoAssignment, avatar = _b.avatar, channel = _b.channel;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1670,10 +1672,13 @@ var ChatwootClient = /** @class */ (function () {
                 if (!id) {
                     return [2 /*return*/, { success: false, error: "id is required" }];
                 }
+                if (!enableAutoAssignment) {
+                    return [2 /*return*/, { success: false, error: "enableAutoAssignment is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/inboxes/").concat(id), {
                             name: name,
-                            enable_auto_assignment: enable_auto_assignment,
+                            enable_auto_assignment: enableAutoAssignment,
                             avatar: avatar,
                             channel: channel,
                         }, {
@@ -1712,7 +1717,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.addInboxAgent = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, inboxId = _b.inboxId, user_ids = _b.user_ids;
+            var accountId = _b.accountId, inboxId = _b.inboxId, userIds = _b.userIds;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1720,10 +1725,16 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
+                if (!inboxId) {
+                    return [2 /*return*/, { success: false, error: "inboxId is required" }];
+                }
+                if (!userIds) {
+                    return [2 /*return*/, { success: false, error: "userIds is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/inbox_members"), {
                             inbox_id: inboxId,
-                            user_ids: user_ids,
+                            user_ids: userIds,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -1736,7 +1747,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateInboxAgents = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, inboxId = _b.inboxId, user_ids = _b.user_ids;
+            var accountId = _b.accountId, inboxId = _b.inboxId, userIds = _b.userIds;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1744,10 +1755,16 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
+                if (!inboxId) {
+                    return [2 /*return*/, { success: false, error: "inboxId is required" }];
+                }
+                if (!userIds) {
+                    return [2 /*return*/, { success: false, error: "userIds is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/inbox_members"), {
                             inbox_id: inboxId,
-                            user_ids: user_ids,
+                            user_ids: userIds,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -1760,7 +1777,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.removeInboxAgent = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, inboxId = _b.inboxId, user_ids = _b.user_ids;
+            var accountId = _b.accountId, inboxId = _b.inboxId, userIds = _b.userIds;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1768,11 +1785,17 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
+                if (!inboxId) {
+                    return [2 /*return*/, { success: false, error: "inboxId is required" }];
+                }
+                if (!userIds) {
+                    return [2 /*return*/, { success: false, error: "userIds is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.delete("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/inbox_members"), {
                             data: {
                                 inbox_id: inboxId,
-                                user_ids: user_ids,
+                                user_ids: userIds,
                             },
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -1809,7 +1832,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.createIntegrationHook = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, app_id = _b.app_id, inbox_id = _b.inbox_id, settings = _b.settings;
+            var accountId = _b.accountId, appId = _b.appId, inboxId = _b.inboxId, settings = _b.settings;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1819,8 +1842,8 @@ var ChatwootClient = /** @class */ (function () {
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/integrations/hooks"), {
-                            app_id: app_id,
-                            inbox_id: inbox_id,
+                            app_id: appId,
+                            inbox_id: inboxId,
                             settings: settings,
                         }, {
                             headers: {
@@ -1834,7 +1857,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateIntegrationHook = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, hook_id = _b.hook_id, settings = _b.settings;
+            var accountId = _b.accountId, hookId = _b.hookId, settings = _b.settings;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1842,11 +1865,11 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
-                if (!hook_id) {
-                    return [2 /*return*/, { success: false, error: "hook_id is required" }];
+                if (!hookId) {
+                    return [2 /*return*/, { success: false, error: "hookId is required" }];
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
-                        return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/integrations/hooks/").concat(hook_id), {
+                        return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/integrations/hooks/").concat(hookId), {
                             settings: settings,
                         }, {
                             headers: {
@@ -1860,7 +1883,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.deleteIntegrationHook = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, hook_id = _b.hook_id;
+            var accountId = _b.accountId, hookId = _b.hookId;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1868,11 +1891,11 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
-                if (!hook_id) {
-                    return [2 /*return*/, { success: false, error: "hook_id is required" }];
+                if (!hookId) {
+                    return [2 /*return*/, { success: false, error: "hookId is required" }];
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
-                        return _this.axiosInstance.delete("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/integrations/hooks/").concat(hook_id), {
+                        return _this.axiosInstance.delete("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/integrations/hooks/").concat(hookId), {
                             headers: {
                                 api_access_token: _this.config.userToken,
                             },
@@ -1911,7 +1934,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.createMessage = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, conversationId = _b.conversationId, content = _b.content, message_type = _b.message_type, isPrivate = _b.private, content_type = _b.content_type, content_attributes = _b.content_attributes, template_params = _b.template_params;
+            var accountId = _b.accountId, conversationId = _b.conversationId, content = _b.content, messageType = _b.messageType, isPrivate = _b.private, contentType = _b.contentType, contentAttributes = _b.contentAttributes, templateParams = _b.templateParams;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1925,17 +1948,14 @@ var ChatwootClient = /** @class */ (function () {
                 if (!content) {
                     return [2 /*return*/, { success: false, error: "content is required" }];
                 }
-                if (!message_type) {
-                    return [2 /*return*/, { success: false, error: "message_type is required" }];
-                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/conversations/").concat(conversationId, "/messages"), {
                             content: content,
-                            message_type: message_type,
+                            message_type: messageType,
                             private: isPrivate,
-                            content_type: content_type,
-                            content_attributes: content_attributes,
-                            template_params: template_params,
+                            content_type: contentType,
+                            content_attributes: contentAttributes,
+                            template_params: templateParams,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -2056,7 +2076,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.getAgentConversationMetrics = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, type = _b.type, user_id = _b.user_id;
+            var accountId = _b.accountId, type = _b.type, userId = _b.userId;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2067,12 +2087,9 @@ var ChatwootClient = /** @class */ (function () {
                 if (!type) {
                     return [2 /*return*/, { success: false, error: "type is required" }];
                 }
-                if (!user_id) {
-                    return [2 /*return*/, { success: false, error: "user_id is required" }];
-                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.get("/api/v2/accounts/".concat(accountId, "/reports/conversations"), {
-                            params: { type: type, user_id: user_id },
+                            params: { type: type, user_id: userId },
                             headers: {
                                 api_access_token: _this.config.userToken,
                             },
@@ -2108,7 +2125,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.createTeam = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, name = _b.name, description = _b.description, allow_auto_assign = _b.allow_auto_assign;
+            var accountId = _b.accountId, name = _b.name, description = _b.description, allowAutoAssign = _b.allowAutoAssign;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2120,7 +2137,7 @@ var ChatwootClient = /** @class */ (function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/teams"), {
                             name: name,
                             description: description,
-                            allow_auto_assign: allow_auto_assign,
+                            allow_auto_assign: allowAutoAssign,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -2157,7 +2174,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateTeam = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, teamId = _b.teamId, name = _b.name, description = _b.description, allow_auto_assign = _b.allow_auto_assign;
+            var accountId = _b.accountId, teamId = _b.teamId, name = _b.name, description = _b.description, allowAutoAssign = _b.allowAutoAssign;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2172,7 +2189,7 @@ var ChatwootClient = /** @class */ (function () {
                         return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/teams/").concat(teamId), {
                             name: name,
                             description: description,
-                            allow_auto_assign: allow_auto_assign,
+                            allow_auto_assign: allowAutoAssign,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -2233,7 +2250,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.addTeamAgent = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, teamId = _b.teamId, user_ids = _b.user_ids;
+            var accountId = _b.accountId, teamId = _b.teamId, userIds = _b.userIds;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2241,9 +2258,15 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
+                if (!teamId) {
+                    return [2 /*return*/, { success: false, error: "teamId is required" }];
+                }
+                if (!userIds) {
+                    return [2 /*return*/, { success: false, error: "userIds is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/teams/").concat(teamId, "/team_members"), {
-                            user_ids: user_ids,
+                            user_ids: userIds,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -2256,7 +2279,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateTeamAgents = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, teamId = _b.teamId, user_ids = _b.user_ids;
+            var accountId = _b.accountId, teamId = _b.teamId, userIds = _b.userIds;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2264,9 +2287,15 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
+                if (!teamId) {
+                    return [2 /*return*/, { success: false, error: "teamId is required" }];
+                }
+                if (!userIds) {
+                    return [2 /*return*/, { success: false, error: "userIds is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/teams/").concat(teamId, "/team_members"), {
-                            user_ids: user_ids,
+                            user_ids: userIds,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -2279,7 +2308,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.removeTeamAgent = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, teamId = _b.teamId, user_ids = _b.user_ids;
+            var accountId = _b.accountId, teamId = _b.teamId, userIds = _b.userIds;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2287,10 +2316,16 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
+                if (!teamId) {
+                    return [2 /*return*/, { success: false, error: "teamId is required" }];
+                }
+                if (!userIds) {
+                    return [2 /*return*/, { success: false, error: "userIds is required" }];
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
                         return _this.axiosInstance.delete("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/teams/").concat(teamId, "/team_members"), {
                             data: {
-                                user_ids: user_ids,
+                                user_ids: userIds,
                             },
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -2351,7 +2386,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateWebhook = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, webhook_id = _b.webhook_id, url = _b.url, subscriptions = _b.subscriptions;
+            var accountId = _b.accountId, webhookId = _b.webhookId, url = _b.url, subscriptions = _b.subscriptions;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2359,11 +2394,11 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
-                if (!webhook_id) {
-                    return [2 /*return*/, { success: false, error: "webhook_id is required" }];
+                if (!webhookId) {
+                    return [2 /*return*/, { success: false, error: "webhookId is required" }];
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
-                        return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/webhooks/").concat(webhook_id), {
+                        return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/webhooks/").concat(webhookId), {
                             url: url,
                             subscriptions: subscriptions,
                         }, {
@@ -2378,7 +2413,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.deleteWebhook = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, webhook_id = _b.webhook_id;
+            var accountId = _b.accountId, webhookId = _b.webhookId;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2386,11 +2421,11 @@ var ChatwootClient = /** @class */ (function () {
                 if (!accountId) {
                     return [2 /*return*/, { success: false, error: "accountId is required" }];
                 }
-                if (!webhook_id) {
-                    return [2 /*return*/, { success: false, error: "webhook_id is required" }];
+                if (!webhookId) {
+                    return [2 /*return*/, { success: false, error: "webhookId is required" }];
                 }
                 return [2 /*return*/, this.requestWithRetry(function () {
-                        return _this.axiosInstance.delete("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/webhooks/").concat(webhook_id), {
+                        return _this.axiosInstance.delete("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/webhooks/").concat(webhookId), {
                             headers: {
                                 api_access_token: _this.config.userToken,
                             },
@@ -2427,7 +2462,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.addAutomationRule = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, name = _b.name, description = _b.description, event_name = _b.event_name, active = _b.active, actions = _b.actions, conditions = _b.conditions;
+            var accountId = _b.accountId, name = _b.name, description = _b.description, eventName = _b.eventName, active = _b.active, actions = _b.actions, conditions = _b.conditions;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2439,7 +2474,7 @@ var ChatwootClient = /** @class */ (function () {
                         return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/automation_rules"), {
                             name: name,
                             description: description,
-                            event_name: event_name,
+                            event_name: eventName,
                             active: active,
                             actions: actions,
                             conditions: conditions,
@@ -2479,7 +2514,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updateAutomationRule = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, id = _b.id, name = _b.name, description = _b.description, event_name = _b.event_name, active = _b.active, actions = _b.actions, conditions = _b.conditions;
+            var accountId = _b.accountId, id = _b.id, name = _b.name, description = _b.description, eventName = _b.eventName, active = _b.active, actions = _b.actions, conditions = _b.conditions;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2494,7 +2529,7 @@ var ChatwootClient = /** @class */ (function () {
                         return _this.axiosInstance.patch("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/automation_rules/").concat(id), {
                             name: name,
                             description: description,
-                            event_name: event_name,
+                            event_name: eventName,
                             active: active,
                             actions: actions,
                             conditions: conditions,
@@ -2537,7 +2572,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.addPortal = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, archived = _b.archived, color = _b.color, config = _b.config, custom_domain = _b.custom_domain, header_text = _b.header_text, homepage_link = _b.homepage_link, name = _b.name, slug = _b.slug, page_title = _b.page_title;
+            var accountId = _b.accountId, archived = _b.archived, color = _b.color, config = _b.config, customDomain = _b.customDomain, headerText = _b.headerText, homepageLink = _b.homepageLink, name = _b.name, slug = _b.slug, pageTitle = _b.pageTitle;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2550,12 +2585,13 @@ var ChatwootClient = /** @class */ (function () {
                             archived: archived,
                             color: color,
                             config: config,
-                            custom_domain: custom_domain,
-                            header_text: header_text,
-                            homepage_link: homepage_link,
+                            custom_domain: customDomain,
+                            header_text: headerText,
+                            homepage_link: homepageLink,
                             name: name,
                             slug: slug,
-                            page_title: page_title,
+                            page_title: pageTitle,
+                            account_id: accountId,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -2589,7 +2625,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.updatePortal = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, archived = _b.archived, color = _b.color, config = _b.config, custom_domain = _b.custom_domain, header_text = _b.header_text, homepage_link = _b.homepage_link, name = _b.name, slug = _b.slug, page_title = _b.page_title;
+            var accountId = _b.accountId, archived = _b.archived, color = _b.color, config = _b.config, customDomain = _b.customDomain, headerText = _b.headerText, homepageLink = _b.homepageLink, name = _b.name, slug = _b.slug, pageTitle = _b.pageTitle;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2602,12 +2638,13 @@ var ChatwootClient = /** @class */ (function () {
                             archived: archived,
                             color: color,
                             config: config,
-                            custom_domain: custom_domain,
-                            header_text: header_text,
-                            homepage_link: homepage_link,
+                            custom_domain: customDomain,
+                            header_text: headerText,
+                            homepage_link: homepageLink,
                             name: name,
                             slug: slug,
-                            page_title: page_title,
+                            page_title: pageTitle,
+                            account_id: accountId,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -2620,7 +2657,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.addCategory = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, portalId = _b.portalId, description = _b.description, locale = _b.locale, name = _b.name, slug = _b.slug, position = _b.position, associated_category_id = _b.associated_category_id, parent_category_id = _b.parent_category_id;
+            var accountId = _b.accountId, portalId = _b.portalId, description = _b.description, locale = _b.locale, name = _b.name, slug = _b.slug, position = _b.position, associatedCategoryId = _b.associatedCategoryId, parentCategoryId = _b.parentCategoryId;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2638,8 +2675,8 @@ var ChatwootClient = /** @class */ (function () {
                             name: name,
                             slug: slug,
                             position: position,
-                            associated_category_id: associated_category_id,
-                            parent_category_id: parent_category_id,
+                            associated_category_id: associatedCategoryId,
+                            parent_category_id: parentCategoryId,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,
@@ -2652,7 +2689,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.addArticle = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, portalId = _b.portalId, content = _b.content, meta = _b.meta, position = _b.position, status = _b.status, title = _b.title, slug = _b.slug, views = _b.views, author_id = _b.author_id, category_id = _b.category_id, folder_id = _b.folder_id, associated_article_id = _b.associated_article_id;
+            var accountId = _b.accountId, portalId = _b.portalId, content = _b.content, meta = _b.meta, position = _b.position, status = _b.status, title = _b.title, slug = _b.slug, views = _b.views, authorId = _b.authorId, categoryId = _b.categoryId, folderId = _b.folderId, associatedArticleId = _b.associatedArticleId;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -2672,10 +2709,10 @@ var ChatwootClient = /** @class */ (function () {
                             title: title,
                             slug: slug,
                             views: views,
-                            author_id: author_id,
-                            category_id: category_id,
-                            folder_id: folder_id,
-                            associated_article_id: associated_article_id,
+                            author_id: authorId,
+                            category_id: categoryId,
+                            folder_id: folderId,
+                            associated_article_id: associatedArticleId,
                         }, {
                             headers: {
                                 api_access_token: _this.config.userToken,

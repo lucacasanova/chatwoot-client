@@ -44,7 +44,7 @@ export interface Account {
 }
 
 export interface CreateAccount {
-  name: string;
+  name?: string;
 }
 
 export interface GetAccount {
@@ -53,7 +53,7 @@ export interface GetAccount {
 
 export interface UpdateAccount {
   accountId: number;
-  name: string;
+  name?: string;
 }
 
 export interface DeleteAccount {
@@ -84,9 +84,9 @@ export interface DeleteAccountUser {
 export interface ListAgentBots {}
 
 export interface CreateAgentBot {
-  name: string;
-  description: string;
-  outgoing_url: string;
+  name?: string;
+  description?: string;
+  outgoingUrl?: string;
 }
 
 export interface GetAgentBotDetails {
@@ -95,9 +95,9 @@ export interface GetAgentBotDetails {
 
 export interface UpdateAgentBot {
   id: number;
-  name: string;
-  description: string;
-  outgoing_url: string;
+  name?: string;
+  description?: string;
+  outgoingUrl?: string;
 }
 
 export interface DeleteAgentBot {
@@ -143,9 +143,9 @@ export interface UserDetails {
 
 export interface UpdateUser {
   id: number;
-  name: string;
-  email: string;
-  password: string;
+  name?: string;
+  email?: string;
+  password?: string;
   customAttributes?: Record<string, any>;
 }
 
@@ -185,9 +185,9 @@ export interface ListAccountAgentBots {
 
 export interface CreateAccountAgentBot {
   accountId: number;
-  name: string;
-  description: string;
-  outgoing_url: string;
+  name?: string;
+  description?: string;
+  outgoingUrl?: string;
 }
 
 export interface GetAccountAgentBotDetails {
@@ -198,9 +198,9 @@ export interface GetAccountAgentBotDetails {
 export interface UpdateAccountAgentBot {
   accountId: number;
   id: number;
-  name: string;
-  description: string;
-  outgoing_url: string;
+  name?: string;
+  description?: string;
+  outgoingUrl?: string;
 }
 
 export interface DeleteAccountAgentBot {
@@ -263,8 +263,8 @@ export interface ListCannedResponses {
 
 export interface AddCannedResponse {
   accountId: number;
-  content: string;
-  short_code: string;
+  content?: string;
+  shortCode?: string;
 }
 
 export interface DeleteCannedResponse {
@@ -512,14 +512,14 @@ export interface ContactListItemPayload {
 export interface FilterContacts {
   accountId: number;
   page?: number;
-  payload: Array<{
-    attribute_key: string;
-    filter_operator:
+  payload?: Array<{
+    attribute_key?: string;
+    filter_operator?:
       | "equal_to"
       | "not_equal_to"
       | "contains"
       | "does_not_contain";
-    values: string[];
+    values?: string[];
     query_operator?: "AND" | "OR";
   }>;
 }
@@ -589,7 +589,7 @@ export interface ListConversationLabels {
 export interface AddConversationLabels {
   accountId: number;
   conversationId: number;
-  labels: string[];
+  labels?: string[];
 }
 
 export interface LabelsPayload {
@@ -698,7 +698,7 @@ export interface CreateConversation {
   status?: "open" | "resolved" | "pending";
   assigneeId?: string;
   teamId?: string;
-  message: {
+  message?: {
     content: string;
     template_params?: {
       name?: string;
@@ -718,14 +718,14 @@ export interface Conversation {
 export interface FilterConversations {
   accountId: number;
   page?: number;
-  payload: Array<{
-    attribute_key: string;
-    filter_operator:
+  payload?: Array<{
+    attribute_key?: string;
+    filter_operator?:
       | "equal_to"
       | "not_equal_to"
       | "contains"
       | "does_not_contain";
-    values: string[];
+    values?: string[];
     query_operator?: "AND" | "OR";
   }>;
 }
@@ -875,12 +875,12 @@ export interface ListCustomAttributes {
 
 export interface AddCustomAttribute {
   accountId: number;
-  attribute_display_name: string;
-  attribute_display_type: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-  attribute_description: string;
-  attribute_key: string;
-  attribute_values: string[];
-  attribute_model: 0 | 1;
+  attributeDisplayName?: string;
+  attributeDisplayType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+  attributeDescription?: string;
+  attributeKey?: string;
+  attributeValues?: string[];
+  attributeModel?: 0 | 1;
 }
 
 export interface GetCustomAttributeDetails {
@@ -891,12 +891,12 @@ export interface GetCustomAttributeDetails {
 export interface UpdateCustomAttribute {
   accountId: number;
   id: number;
-  attribute_display_name: string;
-  attribute_display_type: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-  attribute_description: string;
-  attribute_key: string;
-  attribute_values: string[];
-  attribute_model: 0 | 1;
+  attributeDisplayName?: string;
+  attributeDisplayType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+  attributeDescription?: string;
+  attributeKey?: string;
+  attributeValues?: string[];
+  attributeModel?: 0 | 1;
 }
 
 export interface DeleteCustomAttribute {
@@ -918,14 +918,15 @@ export interface CustomAttribute {
 
 export interface ListCustomFilters {
   accountId: number;
-  filterType: "conversation" | "contact" | "report";
+  filterType?: "conversation" | "contact" | "report";
 }
 
 export interface AddCustomFilter {
   accountId: number;
-  name: string;
-  type: "conversation" | "contact" | "report";
-  query: Record<string, any>;
+  filterType?: string;
+  name?: string;
+  type?: "conversation" | "contact" | "report";
+  query?: Record<string, any>;
 }
 
 export interface GetCustomFilterDetails {
@@ -936,9 +937,9 @@ export interface GetCustomFilterDetails {
 export interface UpdateCustomFilter {
   accountId: number;
   customFilterId: number;
-  name: string;
-  type: "conversation" | "contact" | "report";
-  query: Record<string, any>;
+  name?: string;
+  type?: "conversation" | "contact" | "report";
+  query?: Record<string, any>;
 }
 
 export interface DeleteCustomFilter {
@@ -966,13 +967,13 @@ export interface GetInboxDetails {
 
 export interface CreateInbox {
   accountId: number;
-  name: string;
+  name?: string;
   avatar?: string;
-  channel: {
-    type: "web_widget";
-    website_url: string;
-    welcome_title: string;
-    welcome_tagline: string;
+  channel?: {
+    type?: "web_widget";
+    website_url?: string;
+    welcome_title?: string;
+    welcome_tagline?: string;
     agent_away_message?: string;
     widget_color?: string;
   };
@@ -981,13 +982,13 @@ export interface CreateInbox {
 export interface UpdateInbox {
   accountId: number;
   id: number;
-  name: string;
-  enable_auto_assignment: boolean;
+  name?: string;
+  enableAutoAssignment: boolean;
   avatar?: string;
-  channel: {
-    website_url: string;
-    welcome_title: string;
-    welcome_tagline: string;
+  channel?: {
+    website_url?: string;
+    welcome_title?: string;
+    welcome_tagline?: string;
     agent_away_message?: string;
     widget_color?: string;
   };
@@ -1017,19 +1018,19 @@ export interface ListInboxAgents {
 export interface AddInboxAgent {
   accountId: number;
   inboxId: string;
-  user_ids: number[];
+  userIds: number[];
 }
 
 export interface UpdateInboxAgents {
   accountId: number;
   inboxId: string;
-  user_ids: number[];
+  userIds: number[];
 }
 
 export interface RemoveInboxAgent {
   accountId: number;
   inboxId: string;
-  user_ids: number[];
+  userIds: number[];
 }
 
 export interface InboxAgent {
@@ -1053,20 +1054,20 @@ export interface ListIntegrations {
 
 export interface CreateIntegrationHook {
   accountId: number;
-  app_id: string;
-  inbox_id?: string;
-  settings: Record<string, any>;
+  appId?: string;
+  inboxId?: string;
+  settings?: Record<string, any>;
 }
 
 export interface UpdateIntegrationHook {
   accountId: number;
-  hook_id: number;
-  settings: Record<string, any>;
+  hookId: number;
+  settings?: Record<string, any>;
 }
 
 export interface DeleteIntegrationHook {
   accountId: number;
-  hook_id: number;
+  hookId: number;
 }
 
 export interface Integration {
@@ -1081,7 +1082,7 @@ export interface Integration {
 
 export interface IntegrationHook {
   id: string;
-  app_id: string;
+  appId: string;
   inbox_id?: string;
   account_id: string;
   status: boolean;
@@ -1098,11 +1099,11 @@ export interface CreateMessage {
   accountId: number;
   conversationId: number;
   content: string;
-  message_type: "outgoing" | "incoming";
+  messageType?: "outgoing" | "incoming";
   private?: boolean;
-  content_type?: "input_email" | "cards" | "input_select" | "form" | "article";
-  content_attributes?: Record<string, any>;
-  template_params?: {
+  contentType?: "input_email" | "cards" | "input_select" | "form" | "article";
+  contentAttributes?: Record<string, any>;
+  templateParams?: {
     name?: string;
     category?: string;
     language?: string;
@@ -1160,7 +1161,7 @@ export interface GetAccountConversationMetrics {
 export interface GetAgentConversationMetrics {
   accountId: number;
   type: "agent";
-  user_id: string;
+  userId?: string;
 }
 
 export interface Report {
@@ -1206,9 +1207,9 @@ export interface ListTeams {
 
 export interface CreateTeam {
   accountId: number;
-  name: string;
-  description: string;
-  allow_auto_assign: boolean;
+  name?: string;
+  description?: string;
+  allowAutoAssign?: boolean;
 }
 
 export interface GetTeamDetails {
@@ -1219,9 +1220,9 @@ export interface GetTeamDetails {
 export interface UpdateTeam {
   accountId: number;
   teamId: number;
-  name: string;
-  description: string;
-  allow_auto_assign: boolean;
+  name?: string;
+  description?: string;
+  allowAutoAssign?: boolean;
 }
 
 export interface DeleteTeam {
@@ -1237,43 +1238,43 @@ export interface ListTeamAgents {
 export interface AddTeamAgent {
   accountId: number;
   teamId: number;
-  user_ids: number[];
+  userIds: number[];
 }
 
 export interface UpdateTeamAgents {
   accountId: number;
   teamId: number;
-  user_ids: number[];
+  userIds: number[];
 }
 
 export interface RemoveTeamAgent {
   accountId: number;
   teamId: number;
-  user_ids: number[];
+  userIds: number[];
 }
 
 export interface Team {
   id: number;
   name: string;
   description: string;
-  allow_auto_assign: boolean;
-  account_id: number;
-  is_member: boolean;
+  allowAutoAssign: boolean;
+  accountId: number;
+  isMember: boolean;
 }
 
 export interface TeamAgent {
   id: number;
   uid: string;
   name: string;
-  available_name: string;
-  display_name: string;
+  availableName: string;
+  displayName: string;
   email: string;
-  account_id: number;
+  accountId: number;
   role: "agent" | "administrator";
   confirmed: boolean;
-  availability_status: "available" | "busy" | "offline";
-  auto_offline: boolean;
-  custom_attributes: Record<string, any>;
+  availabilityStatus: "available" | "busy" | "offline";
+  autoffline: boolean;
+  customAttributes: Record<string, any>;
 }
 
 export interface ListWebhooks {
@@ -1282,8 +1283,8 @@ export interface ListWebhooks {
 
 export interface AddWebhook {
   accountId: number;
-  url: string;
-  subscriptions: (
+  url?: string;
+  subscriptions?: (
     | "conversation_created"
     | "conversation_status_changed"
     | "conversation_updated"
@@ -1297,9 +1298,9 @@ export interface AddWebhook {
 
 export interface UpdateWebhook {
   accountId: number;
-  webhook_id: number;
-  url: string;
-  subscriptions: (
+  webhookId: number;
+  url?: string;
+  subscriptions?: (
     | "conversation_created"
     | "conversation_status_changed"
     | "conversation_updated"
@@ -1313,7 +1314,7 @@ export interface UpdateWebhook {
 
 export interface DeleteWebhook {
   accountId: number;
-  webhook_id: number;
+  webhookId: number;
 }
 
 export interface Webhook {
@@ -1330,15 +1331,15 @@ export interface ListAutomationRules {
 
 export interface AddAutomationRule {
   accountId: number;
-  name: string;
-  description: string;
-  event_name:
+  name?: string;
+  description?: string;
+  eventName?:
     | "conversation_created"
     | "conversation_updated"
     | "message_created";
-  active: boolean;
-  actions: Record<string, any>[];
-  conditions: Record<string, any>[];
+  active?: boolean;
+  actions?: Record<string, any>[];
+  conditions?: Record<string, any>[];
 }
 
 export interface GetAutomationRuleDetails {
@@ -1349,15 +1350,15 @@ export interface GetAutomationRuleDetails {
 export interface UpdateAutomationRule {
   accountId: number;
   id: number;
-  name: string;
-  description: string;
-  event_name:
+  name?: string;
+  description?: string;
+  eventName?:
     | "conversation_created"
     | "conversation_updated"
     | "message_created";
-  active: boolean;
-  actions: Record<string, any>[];
-  conditions: Record<string, any>[];
+  active?: boolean;
+  actions?: Record<string, any>[];
+  conditions?: Record<string, any>[];
 }
 
 export interface DeleteAutomationRule {
@@ -1379,18 +1380,18 @@ export interface AutomationRule {
 }
 export interface AddPortal {
   accountId: number;
-  archived: boolean;
-  color: string;
-  config: {
-    allowed_locales: string[];
-    default_locale: string;
+  archived?: boolean;
+  color?: string;
+  config?: {
+    allowed_locales?: string[];
+    default_locale?: string;
   };
-  custom_domain: string;
-  header_text: string;
-  homepage_link: string;
-  name: string;
-  slug: string;
-  page_title: string;
+  customDomain?: string;
+  headerText?: string;
+  homepageLink?: string;
+  name?: string;
+  slug?: string;
+  pageTitle?: string;
 }
 
 export interface ListPortals {
@@ -1399,18 +1400,18 @@ export interface ListPortals {
 
 export interface UpdatePortal {
   accountId: number;
-  archived: boolean;
-  color: string;
-  config: {
-    allowed_locales: string[];
-    default_locale: string;
+  archived?: boolean;
+  color?: string;
+  config?: {
+    allowed_locales?: string[];
+    default_locale?: string;
   };
-  custom_domain: string;
-  header_text: string;
-  homepage_link: string;
-  name: string;
-  slug: string;
-  page_title: string;
+  customDomain?: string;
+  headerText?: string;
+  homepageLink?: string;
+  name?: string;
+  slug?: string;
+  pageTitle?: string;
 }
 
 export interface Portal {
@@ -1462,27 +1463,27 @@ export interface Article {
 export interface AddCategory {
   accountId: number;
   portalId: number;
-  description: string;
-  locale: string;
-  name: string;
-  slug: string;
-  position: number;
-  associated_category_id?: number;
-  parent_category_id?: number;
+  description?: string;
+  locale?: string;
+  name?: string;
+  slug?: string;
+  position?: number;
+  associatedCategoryId?: number;
+  parentCategoryId?: number;
 }
 
 export interface AddArticle {
   accountId: number;
   portalId: number;
-  content: string;
-  meta: Record<string, any>;
-  position: number;
-  status: "draft" | "published" | "archived";
-  title: string;
-  slug: string;
-  views: number;
-  author_id: number;
-  category_id: number;
-  folder_id: number;
-  associated_article_id?: number;
+  content?: string;
+  meta?: Record<string, any>;
+  position?: number;
+  status?: "draft" | "published" | "archived";
+  title?: string;
+  slug?: string;
+  views?: number;
+  authorId?: number;
+  categoryId?: number;
+  folderId?: number;
+  associatedArticleId?: number;
 }
