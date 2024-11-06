@@ -61,6 +61,7 @@ export interface DeleteAccount {
 }
 
 export interface AccountUser {
+  id: number;
   account_id: number;
   user_id: number;
   role: "administrator" | "agent";
@@ -296,6 +297,9 @@ export interface ListContacts {
 export interface ContactPayload {
   payload: {
     contact: {
+      id: number;
+      availability_status: "online" | "offline";
+      identifier: string;
       email: string;
       name: string;
       phone_number: string;
@@ -304,9 +308,10 @@ export interface ContactPayload {
       custom_attributes: Record<string, any>;
       contact_inboxes: Array<Record<string, any>>;
     };
+    contact_inbox: {
+      source_id: string;
+    };
   };
-  id: number;
-  availability_status: "online" | "offline";
 }
 export interface SearchContacts {
   accountId: number;
@@ -361,7 +366,7 @@ export interface SearchContactsResponse {
 
 export interface CreateContact {
   accountId: number;
-  inboxId: number;
+  inboxId: string;
   name?: string;
   email?: string;
   phoneNumber?: string;
@@ -600,7 +605,7 @@ export interface GetConversationCounts {
   accountId: number;
   status?: "open" | "resolved" | "pending" | "snoozed";
   q?: string;
-  inboxId?: number;
+  inboxId?: string;
   teamId?: number;
   labels?: string[];
 }
@@ -619,7 +624,7 @@ export interface ListConversations {
   assigneeType?: "me" | "unassigned" | "all" | "assigned";
   status?: "open" | "resolved" | "pending" | "snoozed";
   q?: string;
-  inboxId?: number;
+  inboxId?: string;
   teamId?: number;
   labels?: string[];
   page?: number;
@@ -691,14 +696,14 @@ export interface ConversationListResponse {
 export interface CreateConversation {
   accountId: number;
   sourceId: string;
-  inboxId: string;
-  contactId?: string;
+  inboxId: number;
+  contactId?: number;
   additionalAttributes?: Record<string, any>;
   customAttributes?: Record<string, any>;
   status?: "open" | "resolved" | "pending";
   assigneeId?: string;
-  teamId?: string;
-  message?: {
+  teamId?: number;
+  message: {
     content: string;
     template_params?: {
       name?: string;
@@ -970,7 +975,8 @@ export interface CreateInbox {
   name?: string;
   avatar?: string;
   channel?: {
-    type?: "web_widget";
+    type?: "web_widget" | "api";
+    webhook_url?: string;
     website_url?: string;
     welcome_title?: string;
     welcome_tagline?: string;
@@ -1012,12 +1018,12 @@ export interface Inbox {
 
 export interface ListInboxAgents {
   accountId: number;
-  inboxId: number;
+  inboxId: string;
 }
 
 export interface AddInboxAgent {
   accountId: number;
-  inboxId: string;
+  inboxId: number;
   userIds: number[];
 }
 
@@ -1103,6 +1109,8 @@ export interface CreateMessage {
   private?: boolean;
   contentType?: "input_email" | "cards" | "input_select" | "form" | "article";
   contentAttributes?: Record<string, any>;
+  attachments?: any[];
+  fileType?: string;
   templateParams?: {
     name?: string;
     category?: string;

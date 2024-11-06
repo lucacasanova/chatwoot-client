@@ -1934,7 +1934,7 @@ var ChatwootClient = /** @class */ (function () {
     ChatwootClient.prototype.createMessage = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
             var _this = this;
-            var accountId = _b.accountId, conversationId = _b.conversationId, content = _b.content, messageType = _b.messageType, isPrivate = _b.private, contentType = _b.contentType, contentAttributes = _b.contentAttributes, templateParams = _b.templateParams;
+            var accountId = _b.accountId, conversationId = _b.conversationId, content = _b.content, messageType = _b.messageType, isPrivate = _b.private, contentType = _b.contentType, contentAttributes = _b.contentAttributes, attachments = _b.attachments, fileType = _b.fileType, templateParams = _b.templateParams;
             return __generator(this, function (_c) {
                 if (!this.config.userToken) {
                     return [2 /*return*/, { success: false, error: "userToken is required" }];
@@ -1956,8 +1956,11 @@ var ChatwootClient = /** @class */ (function () {
                             content_type: contentType,
                             content_attributes: contentAttributes,
                             template_params: templateParams,
+                            attachments: attachments,
+                            file_type: fileType,
                         }, {
                             headers: {
+                                "Content-Type": "multipart/form-data",
                                 api_access_token: _this.config.userToken,
                             },
                         });

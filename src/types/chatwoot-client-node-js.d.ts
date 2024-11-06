@@ -56,6 +56,7 @@ declare module "chatwoot-client-node-js" {
 
   export interface CreateAccount {
     name?: string;
+    locale?: string;
   }
 
   export interface GetAccount {
@@ -72,6 +73,7 @@ declare module "chatwoot-client-node-js" {
   }
 
   export interface AccountUser {
+    id: number;
     account_id: number;
     user_id: number;
     role: "administrator" | "agent";
@@ -307,6 +309,9 @@ declare module "chatwoot-client-node-js" {
   export interface ContactPayload {
     payload: {
       contact: {
+        id: number;
+        availability_status: "online" | "offline";
+        identifier: string;
         email: string;
         name: string;
         phone_number: string;
@@ -315,9 +320,10 @@ declare module "chatwoot-client-node-js" {
         custom_attributes: Record<string, any>;
         contact_inboxes: Array<Record<string, any>>;
       };
+      contact_inbox: {
+        source_id: string;
+      };
     };
-    id: number;
-    availability_status: "online" | "offline";
   }
   export interface SearchContacts {
     accountId: number;
@@ -372,7 +378,7 @@ declare module "chatwoot-client-node-js" {
 
   export interface CreateContact {
     accountId: number;
-    inboxId: number;
+    inboxId: string;
     name?: string;
     email?: string;
     phoneNumber?: string;
@@ -611,7 +617,7 @@ declare module "chatwoot-client-node-js" {
     accountId: number;
     status?: "open" | "resolved" | "pending" | "snoozed";
     q?: string;
-    inboxId?: number;
+    inboxId?: string;
     teamId?: number;
     labels?: string[];
   }
@@ -630,7 +636,7 @@ declare module "chatwoot-client-node-js" {
     assigneeType?: "me" | "unassigned" | "all" | "assigned";
     status?: "open" | "resolved" | "pending" | "snoozed";
     q?: string;
-    inboxId?: number;
+    inboxId?: string;
     teamId?: number;
     labels?: string[];
     page?: number;
@@ -702,14 +708,14 @@ declare module "chatwoot-client-node-js" {
   export interface CreateConversation {
     accountId: number;
     sourceId: string;
-    inboxId: string;
-    contactId?: string;
+    inboxId: number;
+    contactId?: number;
     additionalAttributes?: Record<string, any>;
     customAttributes?: Record<string, any>;
     status?: "open" | "resolved" | "pending";
     assigneeId?: string;
-    teamId?: string;
-    message?: {
+    teamId?: number;
+    message: {
       content: string;
       template_params?: {
         name?: string;
@@ -981,7 +987,8 @@ declare module "chatwoot-client-node-js" {
     name?: string;
     avatar?: string;
     channel?: {
-      type?: "web_widget";
+      type?: "web_widget" | "api";
+      webhook_url?: string;
       website_url?: string;
       welcome_title?: string;
       welcome_tagline?: string;
@@ -1023,7 +1030,7 @@ declare module "chatwoot-client-node-js" {
 
   export interface ListInboxAgents {
     accountId: number;
-    inboxId: number;
+    inboxId: string;
   }
 
   export interface AddInboxAgent {
@@ -1114,6 +1121,8 @@ declare module "chatwoot-client-node-js" {
     private?: boolean;
     contentType?: "input_email" | "cards" | "input_select" | "form" | "article";
     contentAttributes?: Record<string, any>;
+    attachments?: any[];
+    fileType?: string;
     templateParams?: {
       name?: string;
       category?: string;
@@ -1513,6 +1522,7 @@ declare module "chatwoot-client-node-js" {
 
     public createAccount({
       name,
+      locale,
     }: CreateAccount): Promise<ApiResponse<Account>>;
 
     public getAccount({ accountId }: GetAccount): Promise<ApiResponse<Account>>;
@@ -1943,6 +1953,8 @@ declare module "chatwoot-client-node-js" {
       contentType,
       contentAttributes,
       templateParams,
+      attachments,
+      fileType,
     }: CreateMessage): Promise<ApiResponse<Message>>;
 
     public deleteMessage({

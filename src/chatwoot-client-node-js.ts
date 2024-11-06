@@ -2222,6 +2222,8 @@ class ChatwootClient {
     private: isPrivate,
     contentType,
     contentAttributes,
+    attachments,
+    fileType,
     templateParams,
   }: CreateMessage): Promise<ApiResponse<Message>> {
     if (!this.config.userToken) {
@@ -2246,9 +2248,12 @@ class ChatwootClient {
           content_type: contentType,
           content_attributes: contentAttributes,
           template_params: templateParams,
+          attachments,
+          file_type: fileType,
         },
         {
           headers: {
+            "Content-Type": "multipart/form-data",
             api_access_token: this.config.userToken,
           },
         }
