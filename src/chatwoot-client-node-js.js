@@ -1933,6 +1933,7 @@ var ChatwootClient = /** @class */ (function () {
     };
     ChatwootClient.prototype.createMessage = function (_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
+            var form;
             var _this = this;
             var accountId = _b.accountId, conversationId = _b.conversationId, content = _b.content, messageType = _b.messageType, isPrivate = _b.private, contentType = _b.contentType, contentAttributes = _b.contentAttributes, attachments = _b.attachments, fileType = _b.fileType, templateParams = _b.templateParams;
             return __generator(this, function (_c) {
@@ -1948,17 +1949,31 @@ var ChatwootClient = /** @class */ (function () {
                 if (!content) {
                     return [2 /*return*/, { success: false, error: "content is required" }];
                 }
+                form = new FormData();
+                if (content)
+                    form.append("content", content);
+                if (messageType)
+                    form.append("message_type", messageType);
+                if (isPrivate)
+                    form.append("private", isPrivate.toString());
+                if (contentType)
+                    form.append("content_type", contentType);
+                if (contentAttributes)
+                    form.append("content_attributes", JSON.stringify(contentAttributes));
+                if (templateParams)
+                    form.append("template_params", JSON.stringify(templateParams));
+                if (fileType)
+                    form.append("file_type", fileType);
+                if (attachments && attachments.length > 0) {
+                    attachments.forEach(function (attachment, index) {
+                        var blob = new Blob([attachment.value], {
+                            type: attachment.options.contentType,
+                        });
+                        form.append("attachments[".concat(index, "]"), blob, attachment.options.filename);
+                    });
+                }
                 return [2 /*return*/, this.requestWithRetry(function () {
-                        return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/conversations/").concat(conversationId, "/messages"), {
-                            content: content,
-                            message_type: messageType,
-                            private: isPrivate,
-                            content_type: contentType,
-                            content_attributes: contentAttributes,
-                            template_params: templateParams,
-                            attachments: attachments,
-                            file_type: fileType,
-                        }, {
+                        return _this.axiosInstance.post("/api/v".concat(_this.version, "/accounts/").concat(accountId, "/conversations/").concat(conversationId, "/messages"), form, {
                             headers: {
                                 "Content-Type": "multipart/form-data",
                                 api_access_token: _this.config.userToken,

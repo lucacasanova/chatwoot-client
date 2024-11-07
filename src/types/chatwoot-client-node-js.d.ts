@@ -378,7 +378,7 @@ declare module "chatwoot-client-node-js" {
 
   export interface CreateContact {
     accountId: number;
-    inboxId: string;
+    inboxId: number;
     name?: string;
     email?: string;
     phoneNumber?: string;
@@ -1030,24 +1030,24 @@ declare module "chatwoot-client-node-js" {
 
   export interface ListInboxAgents {
     accountId: number;
-    inboxId: string;
+    inboxId: number;
   }
 
   export interface AddInboxAgent {
     accountId: number;
-    inboxId: string;
+    inboxId: number;
     userIds: number[];
   }
 
   export interface UpdateInboxAgents {
     accountId: number;
-    inboxId: string;
+    inboxId: number;
     userIds: number[];
   }
 
   export interface RemoveInboxAgent {
     accountId: number;
-    inboxId: string;
+    inboxId: number;
     userIds: number[];
   }
 
@@ -1121,7 +1121,13 @@ declare module "chatwoot-client-node-js" {
     private?: boolean;
     contentType?: "input_email" | "cards" | "input_select" | "form" | "article";
     contentAttributes?: Record<string, any>;
-    attachments?: any[];
+    attachments?: {
+      value: Buffer;
+      options: {
+        filename: string;
+        contentType: string;
+      };
+    }[];
     fileType?: string;
     templateParams?: {
       name?: string;

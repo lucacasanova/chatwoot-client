@@ -1,6 +1,6 @@
 {
   "name": "chatwoot-client-node-js",
-  "version": "1.0.8",
+  "version": "1.0.13",
   "description": "TypeScript client for the Chatwoot API",
   "main": "dist/chatwoot-client-node-js.js",
   "types": "dist/types/chatwoot-client-node-js.d.ts",
@@ -24,10 +24,11 @@
     "url": "https://github.com/lucacasanova/chatwoot-client-node-js.git"
   },
   "dependencies": {
-    "axios": "^1.7.7"
+    "axios": "^1.7.7",
+    "form-data": "^4.0.1"
   },
   "devDependencies": {
-    "@types/node": "^22.7.6",
+    "@types/node": "^22.9.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   }

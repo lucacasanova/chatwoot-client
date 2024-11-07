@@ -1,3 +1,5 @@
+import { Buffer } from "buffer";
+
 export interface Config {
   host: string;
   userToken?: string;
@@ -366,7 +368,7 @@ export interface SearchContactsResponse {
 
 export interface CreateContact {
   accountId: number;
-  inboxId: string;
+  inboxId: number;
   name?: string;
   email?: string;
   phoneNumber?: string;
@@ -1018,7 +1020,7 @@ export interface Inbox {
 
 export interface ListInboxAgents {
   accountId: number;
-  inboxId: string;
+  inboxId: number;
 }
 
 export interface AddInboxAgent {
@@ -1029,13 +1031,13 @@ export interface AddInboxAgent {
 
 export interface UpdateInboxAgents {
   accountId: number;
-  inboxId: string;
+  inboxId: number;
   userIds: number[];
 }
 
 export interface RemoveInboxAgent {
   accountId: number;
-  inboxId: string;
+  inboxId: number;
   userIds: number[];
 }
 
@@ -1109,7 +1111,13 @@ export interface CreateMessage {
   private?: boolean;
   contentType?: "input_email" | "cards" | "input_select" | "form" | "article";
   contentAttributes?: Record<string, any>;
-  attachments?: any[];
+  attachments?: {
+    value: Buffer;
+    options: {
+      filename: string;
+      contentType: string;
+    };
+  }[];
   fileType?: string;
   templateParams?: {
     name?: string;

@@ -2238,19 +2238,32 @@ class ChatwootClient {
     if (!content) {
       return { success: false, error: "content is required" };
     }
+
+    const form = new FormData();
+    if (content) form.append("content", content);
+    if (messageType) form.append("message_type", messageType);
+
+    if (isPrivate) form.append("private", isPrivate.toString());
+    if (contentType) form.append("content_type", contentType);
+    if (contentAttributes)
+      form.append("content_attributes", JSON.stringify(contentAttributes));
+    if (templateParams)
+      form.append("template_params", JSON.stringify(templateParams));
+    if (fileType) form.append("file_type", fileType);
+
+    if (attachments && attachments.length > 0) {
+      attachments.forEach((attachment, index) => {
+        const blob = new Blob([attachment.value], {
+          type: attachment.options.contentType,
+        });
+        form.append(`attachments[${index}]`, blob, attachment.options.filename);
+      });
+    }
+
     return this.requestWithRetry(() =>
       this.axiosInstance.post(
         `/api/v${this.version}/accounts/${accountId}/conversations/${conversationId}/messages`,
-        {
-          content,
-          message_type: messageType,
-          private: isPrivate,
-          content_type: contentType,
-          content_attributes: contentAttributes,
-          template_params: templateParams,
-          attachments,
-          file_type: fileType,
-        },
+        form,
         {
           headers: {
             "Content-Type": "multipart/form-data",
